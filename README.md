@@ -1,12 +1,12 @@
 # Team Repository
 ## Campus
-...
+...Clayton
 
 ## Member #1
 ### Name
-...
+...Yulai LI
 ### Email
-...
+...ylii0235@student.monash.edu
 
 
 ## Member #2
