@@ -11,9 +11,9 @@
 
 ## Member #2
 ### Name
-...
+...Chanith MUDUNKOTUWA
 ### Email
-...
+...cmud0003@student.monash.edu.au
 
 
 ## Member #3
