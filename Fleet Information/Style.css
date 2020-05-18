@@ -14,3 +14,8 @@
 #Search{
   display: inline-block;
 }
+
+#HomeBlock{
+  display: inline-block;
+  align-self: center;
+}
