@@ -1,0 +1,16 @@
+#SortByBlock{
+  display: inline-block;
+  align-self: left
+}
+#SearchBlock{
+  display: inline-block;
+  align-self: center;
+}
+#ShowBlock{
+  display: inline-block;
+  align-self: right
+}
+
+#Search{
+  display: inline-block;
+}
