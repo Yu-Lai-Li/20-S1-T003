@@ -7,15 +7,22 @@
 
 .div2 {
   background-color: lightgrey;
-  width: 500px;
+  width: 600px;
   height: 300px;
   border: 1px solid black;
   padding: 5px;
   }
+.div3{
+  background-color: white;
+  width: 600px;
+  height: 300px;
+  border: 1px solid black;
+  padding: 5px;
+}
 .table1{
   background-color: white;
   border-collapse: collapse;
-  width: 500px
+  width: 600px
 }
 .table1 th {
   border: 1px solid;
@@ -24,12 +31,9 @@
 .table1 td {
   border: 1px solid
 }
-.table2{
+.table2 {
   background-color: white;
   border-collapse: collapse;
-  width: 500px;
-  height: 306px;
-}
-.table2 th{
-  border: 1px solid;
+  width: 600px;
+  height: 250px;
 }

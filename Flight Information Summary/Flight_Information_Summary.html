@@ -42,11 +42,12 @@
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--1-col"></div>
             <div class="mdl-cell mdl-cell--6-col">
-              <p style="font-size:16px;">Departure Date: <span id="departureDateSummary">???</span><br>Estimated Arrival: <span id="estimatedArrivalSummary">???</span><br>Distance: <span id="distanceSummary">???</span>
+              <p style="font-size:16px;"><strong>Departure Date: </strong><span id="departureDateSummary">???</span><br><strong>Estimated Arrival: </strong><span id="estimatedArrivalSummary">???</span><br><strong>Distance: </strong><span id="distanceSummary">???</span></p>
             </div>
           </div>
           <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--5-col">
               <div class="div2">
                 <div align="center">
                   <img src="airplaneIcon.jpg" alt="airplane icon" width="50" height="50">
@@ -82,16 +83,25 @@
                   </tr>
                 </table>
               </div>
+              <br>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deleteFlight" onclick="">Delete</button>
             </div>
-            <div class="mdl-cell mdl-cell--6-col">
-              <table class="table2">
-                <tr>
-                  <th>ds</th>
-                </tr>
-                <tr>
-                  <th>sd</th>
-                </tr>
-
+            <div class="mdl-cell mdl-cell--5-col">
+              <div class="div3">
+                <p style="font-size:16px; text-align:center;"><strong>Weather</strong></p>
+                <table class="table2">
+                  <tr>
+                    <th>ds</th>
+                  </tr>
+                  <tr>
+                    <th>sd</th>
+                  </tr>
+                </table>
+              </div>
+              <div align="right">
+                <br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="deleteFlight" onclick="">Home</button>
+              </div>
             </div>
           </div>
         </div>
