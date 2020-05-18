@@ -18,9 +18,9 @@
 
 ## Member #3
 ### Name
-...
+...Le Gong
 ### Email
-...
+...lgon0004@student.monash.edu
 
 
 ## Member #4
