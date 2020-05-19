@@ -1,0 +1,10 @@
+.border{
+  border: 3px solid black;
+  width: fit-contentpx;
+  height:939px;
+  margin:10px
+ }
+ .headings{
+   width: 740px;
+   padding: 290px;
+  }
