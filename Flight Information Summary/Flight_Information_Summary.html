@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <title>App Name</title>
+    <title>Flight Information Summary</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
@@ -21,7 +21,7 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">App Name</span>
+          <span class="mdl-layout-title">SkYsCheGuler</span>
           <div class="mdl-layout-spacer"></div>
         </div>
       </header>
@@ -40,9 +40,15 @@
             <div class="mdl-cell mdl-cell--10-col"><h3><strong>Flight Summary</strong></h3></div>
             <div class="mdl-cell mdl-cell--1-col"></div>
           </div>
-          <div id="map"></div>
-          <div class="div1">
-            <p style="text-align:center;"><span id="originSummary"> </span><img src="arrow.png" alt="arrowIcon" width="15" height="15"><span id="wayPointSummary"> </span><img src="arrow.png" alt="arrowIcon" width="15" height="15"><span id="destinationSummary"></span></p>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--10-col">
+              <div id="map"></div>
+              <div class="div1">
+                <p style="text-align:center;"><span id="originSummary"> </span><img src="arrow.png" alt="arrowIcon" width="15" height="15"><span id="wayPointSummary"> </span><img src="arrow.png" alt="arrowIcon" width="15" height="15"><span id="destinationSummary"></span></p>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col"></div>
           </div>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--1-col"></div>
@@ -93,18 +99,26 @@
                 </table>
               </div>
               <br>
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deleteFlight" onclick="">Delete</button>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deleteFlight" onclick="deleteFlight()">Delete</button>
             </div>
-            <div class="mdl-cell mdl-cell--5-col">
+            <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--4-col">
               <div class="div3">
                 <p style="font-size:16px; text-align:center;"><strong>Weather</strong></p>
                 <table class="table2">
                   <tr>
-                    <th>sa
+                    <th>
+                      <span id="departureSummary">Departure</span>
+                      <img scr="">
                     </th>
+                    <td>info</td>
                   </tr>
                   <tr>
-                    <th>sd</th>
+                    <th>
+                      <span id="departureSummary">Destination</span>
+                      <img scr="">
+                    </th>
+                    <td>Info</td>
                   </tr>
                 </table>
               </div>
