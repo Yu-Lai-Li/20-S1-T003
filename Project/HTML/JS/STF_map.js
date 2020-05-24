@@ -24,7 +24,6 @@ let map = new mapboxgl.Map({
   if (typeof(Storage) !== "undefined")
   {
   	localStorage.setItem("fleet-data",JSON.stringify(fleetInformation));
-  	let nutritionalData= JSON.parse(localStorage.getItem("fleet-data"));
   }
   else
   {
