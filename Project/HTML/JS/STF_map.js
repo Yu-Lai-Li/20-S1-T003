@@ -6,3 +6,28 @@ let map = new mapboxgl.Map({
         center: [145.135844,-37.911103], // starting position [lng, lat]
         zoom: 11 // starting zoom
 })
+
+function getInformationFromCustomer()
+{
+  let fleetInformation = {Date:"",Time:"",Country:"",Airport:""};
+  let dateRef=document.getElementById("date")
+  let timeRef=document.getElementById("time")
+  let countryRef = document.getElementById ("country");
+  let airportRef = document.getElementById("airport")
+
+
+  fleetInformation.Date=dateRef.value
+  fleetInformation.Time=timeRef.value}
+  fleetInformation.Country = countryRef.value
+  fleetInformation.Airport= airportRef.value
+
+  if (typeof(Storage) !== "undefined")
+  {
+  	localStorage.setItem("fleet-data",JSON.stringify(fleetInformation));
+  	let nutritionalData= JSON.parse(localStorage.getItem("fleet-data"));
+  }
+  else
+  {
+  	console.log("localStorage is not supported by current browser.");
+  }
+}
