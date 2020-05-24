@@ -7,7 +7,7 @@ let map = new mapboxgl.Map({
         zoom: 11 // starting zoom
 })
 
-function getInformationFromCustomer()
+/*function getInformationFromCustomer()
 {
   let fleetInformation = {Date:"",Time:"",Country:"",Airport:""};
   let dateRef=document.getElementById("date")
@@ -30,4 +30,21 @@ function getInformationFromCustomer()
   {
   	console.log("localStorage is not supported by current browser.");
   }
+}*/
+
+function search()
+{
+  let fleetInformation = {Date:"",Time:"",Country:"",Airport:""};
+  let dateRef=document.getElementById("date")
+  let timeRef=document.getElementById("time")
+  let countryRef = document.getElementById ("country");
+  let airportRef = document.getElementById("airport")
+
+
+  //fleetInformation.Date=dateRef.value
+  //fleetInformation.Time=timeRef.value}
+  //fleetInformation.Country = countryRef.value
+  //fleetInformation.Airport= airportRef.value
+
+
 }
