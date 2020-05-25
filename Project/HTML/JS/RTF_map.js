@@ -201,11 +201,12 @@ class CoordinateOfLocation
 		 let Δλ = (this.location2[0]-this.location1[0]) * Math.PI/180;
 		 let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) *Math.sin(Δλ/2) * Math.sin(Δλ/2);
 		 let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		 let distance =(R * c)/1000;
-	  	 let output="";
-		 output+= distance+"Km";
-		 return output;
+		 this.distance =(R * c)/1000;
+
+		 return this.distance;
 	  }
+	  toString()
+	  {}
   }
 
 }
