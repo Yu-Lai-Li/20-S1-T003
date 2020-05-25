@@ -76,60 +76,60 @@ function weatherCallback(weather)
     get departureTime() {return this._departureTime;}
     get totalDistance() {return this._totalDistance;}
 
- set origin(newOrigin) {return this._origin=newOrigin;}
- set destination(newDestination) {return this._destination=newDestination;}
- set waypoints(newWaypoints) {return this._waypoints=newWaypoints;}
- set arrivalTime(newArrivalTime) {return this._arrivalTime=newArrivalTime;}
-  set departureTime(newDepartureTime) {return this._departureTime=newDepartureTime;}
+    set origin(newOrigin) {return this._origin=newOrigin;}
+    set destination(newDestination) {return this._destination=newDestination;}
+    set waypoints(newWaypoints) {return this._waypoints=newWaypoints;}
+    set arrivalTime(newArrivalTime) {return this._arrivalTime=newArrivalTime;}
+    set departureTime(newDepartureTime) {return this._departureTime=newDepartureTime;}
 
- addWaypoints(waypoints){}
- deleteRoute(){}
- displayRoutes(){}
- dispaydepature(){}
- dispayArrivalTime(){}
- toString(){}
+    addWaypoints(waypoints){}
+    deleteRoute(){}
+    displayRoutes(){}
+    dispaydepature(){}
+    dispayArrivalTime(){}
+    toString(){}
 
-}
-
-class WeatherInformation
-{}
-
-class PlaneList
-{}
-
-class InformationOfAirplane
-{
-  constructor(model,speed,manufacturer,company,availability, capacity, flyingRange,locationOfAirplane)
-  {
-    this._model=model;
-    this._speed=speed;
-    this._manufacturer=manufactuer;
-    this._company=company;
-    this._availability=availability;
-    this._capacity=capacity;
-    this._flyingRange=flyingRange;
-    this._locationOfAirplane=flyingRange;
   }
 
-get model() {return this._model;}
-get speed() {return this._speed;}
-get manufactuer(){return this._manufacturer;}
-get company () {return this._company;}
-get availability() {return this._availability;}
-get capacity(){return this._capacity;}
-get flyingRange(){return this._flyingRange;}
-get locationOfAirplane() {return this._locationOfAirplane;}
+  class WeatherInformation
+  {}
+
+  class PlaneList
+  {}
+
+  class InformationOfAirplane
+  {
+    constructor(model,speed,manufacturer,company,availability, capacity, flyingRange,locationOfAirplane)
+    {
+      this._model=model;
+      this._speed=speed;
+      this._manufacturer=manufactuer;
+      this._company=company;
+      this._availability=availability;
+      this._capacity=capacity;
+      this._flyingRange=flyingRange;
+      this._locationOfAirplane=flyingRange;
+    }
+
+    get model() {return this._model;}
+    get speed() {return this._speed;}
+    get manufactuer(){return this._manufacturer;}
+    get company () {return this._company;}
+    get availability() {return this._availability;}
+    get capacity(){return this._capacity;}
+    get flyingRange(){return this._flyingRange;}
+    get locationOfAirplane() {return this._locationOfAirplane;}
 
 
-set availability(newAvailabilty) {return this._availability=newAvailabilty;}
-set flyingRange(newFlyingRange){return this._flyingRange=newFlyingRange;}
-set locationOfAirplane(newLocationOfAirplane) {return this._locationOfAirplane=newLocationOfAirplane;}
+    set availability(newAvailabilty) {return this._availability=newAvailabilty;}
+    set flyingRange(newFlyingRange){return this._flyingRange=newFlyingRange;}
+    set locationOfAirplane(newLocationOfAirplane) {return this._locationOfAirplane=newLocationOfAirplane;}
 
-addFlights(){}
-toString(){}
-displayInformation(){}
+    addFlights(){}
+    toString(){}
+    displayInformation(){}
 
-}
+  }
 
-class CooridinateOfLocation
-{}
+  class CooridinateOfLocation
+  {}
