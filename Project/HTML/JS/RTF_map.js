@@ -92,11 +92,27 @@ function weatherCallback(weather)
   }
 
   class WeatherInformation
-  {}
+  {
+    constructor(location,temperature,typeOfWeather)
+    {
+       this._location=location;
+       this._temperature= temperature;
+       this._typeOfWeather=typeOfWeather;
+    }
+  }
 
   class PlaneList
   {
+    constructor(numberOfAirplane,stateOfAirplane)
+    {
+      this._numberOfAirplane=numberOfAirplane;
+      this._stateOfAirplane=stateOfAirplane;
+    }
+      get numberOfAirplane(){return this._numberOfAirplane;}
+      get stateOfAirplane(){return this._stateOfAirplane;}
 
+      set numberOfAirplane(newNumber){this._numberOfAirplane=newNumber;}
+      set stateOfAirplane(newState){this._stateOfAirplane=newState;}
   }
 
   class InformationOfAirplane
@@ -140,17 +156,17 @@ function weatherCallback(weather)
   {
     constructor(lng1,lat1,alt1,lng2,lat2,alt2)
     {
-      this._location1=[lng1,lat1,alt1]
-      this._location2=[lng2,lat2,alt2]
-      this._distance = 0
+      this._location1=[lng1,lat1,alt1];
+      this._location2=[lng2,lat2,alt2];
+      this._distance = 0;
     }
-      get location1(){return this._location1}
-      get location2(){return this._location2}
-      get distance(){return this._distance}
+      get location1(){return this._location1;}
+      get location2(){return this._location2;}
+      get distance(){return this._distance;}
 
 
-      set location1(newLng1,newlat1,newAlt1){this._location1=[newLng1,newlat1,newAlt1]}
-      set location2(newLng2,newlat2,newAlt2){this._location1=[newLng2,newlat2,newAlt2]}
-      set distance(newDitance){this._distance=newDistance}
+      set location1(newLng1,newlat1,newAlt1){this._location1=[newLng1,newlat1,newAlt1];}
+      set location2(newLng2,newlat2,newAlt2){this._location1=[newLng2,newlat2,newAlt2];}
+      set distance(newDitance){this._distance=newDistance;}
 
   }
