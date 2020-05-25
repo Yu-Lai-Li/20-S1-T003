@@ -99,6 +99,14 @@ function weatherCallback(weather)
        this._temperature= temperature;
        this._typeOfWeather=typeOfWeather;
     }
+    	  get location(){return this._location;}
+    	  get temperature(){return this._temperature;}
+    	  get typeOfWeather(){return this._typeOfWeather;}
+
+    	  set location(newLocation){this._location=newLocation;}
+    	  set temperature(newTemperature){this._temperature=newTemperature;}
+    	  set typeOfWeather(newType){this._typeOfWeather=newType;}
+
   }
 
   class PlaneList
@@ -158,15 +166,12 @@ function weatherCallback(weather)
     {
       this._location1=[lng1,lat1,alt1];
       this._location2=[lng2,lat2,alt2];
-      this._distance = 0;
+      this._distance =0;
     }
       get location1(){return this._location1;}
       get location2(){return this._location2;}
       get distance(){return this._distance;}
 
 
-      set location1(newLng1,newlat1,newAlt1){this._location1=[newLng1,newlat1,newAlt1];}
-      set location2(newLng2,newlat2,newAlt2){this._location1=[newLng2,newlat2,newAlt2];}
-      set distance(newDitance){this._distance=newDistance;}
-
+      set distance(newDistance){this._distance=newDistance;}
   }
