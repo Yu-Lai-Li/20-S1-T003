@@ -13,8 +13,6 @@ function positionCallback(position)
   let cityRef=document.getElementById("city");
   let country=countryRef.value;
   let city =cityRef.value;
-  console.log(country);
-  console.log(city);
   let url ="https://eng1003.monash/api/v1/airports/";
   let data =
   {
@@ -52,7 +50,6 @@ function webServiceRequest(url,data)
     script.src = url + params;
     document.body.appendChild(script);
 }
-
 function airportCallback(data)
 {
   for (let i = 0; i < data.length; i++)
@@ -62,6 +59,29 @@ function airportCallback(data)
 
   	let popup = new mapboxgl.Popup({ offset: 45});
   	popup.setText(data[i].airportCode);
+
+  	marker.setPopup(popup);
+  	marker.addTo(map);
+  	popup.addTo(map);
+  }
+}
+function airplaneCallback()
+{
+  let url ="https://eng1003.monash/api/v1/airplane/";
+  let data =
+  {
+    u: "ylii0235",
+    key: DARKSKY_KEY,
+    callback: "locateAirplane"
+  };
+  webServiceRequest(url,data);
+}
+function locateAirplane(data)
+{
+  for (let i = 0; i < data.length; i++)
+  {
+  	let popup = new mapboxgl.Popup({ offset: 45});
+  	popup.setText(data[i].id);
 
   	marker.setPopup(popup);
   	marker.addTo(map);
