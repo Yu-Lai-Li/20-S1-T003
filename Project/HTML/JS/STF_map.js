@@ -13,6 +13,8 @@ function positionCallback(position)
   let cityRef=document.getElementById("city");
   let country=countryRef.value;
   let city =cityRef.value;
+  console.log(country);
+  console.log(city);
   let url ="https://eng1003.monash/api/v1/airports/";
   let data =
   {
@@ -53,21 +55,16 @@ function webServiceRequest(url,data)
 
 function airportCallback(data)
 {
-  console.log(data);
   for (let i = 0; i < data.length; i++)
   {
   	let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
-  	marker.setLngLat(data.longitude,data.latitude);
+  	marker.setLngLat([data[i].longitude,data[i].latitude]);
 
   	let popup = new mapboxgl.Popup({ offset: 45});
-  	popup.setText(data.airportCode);
+  	popup.setText(data[i].airportCode);
 
   	marker.setPopup(popup);
-
-  	// Display the marker.
   	marker.addTo(map);
-
-  	// Display the popup.
   	popup.addTo(map);
   }
 }
