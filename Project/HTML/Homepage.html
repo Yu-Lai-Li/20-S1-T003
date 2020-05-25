@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>App Name</title>
+  <title>Home</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style type="text/css">
   #map{
-    height: calc(90vh - 50px);
+    height: calc(90vh - 56px);
+    width: calc(136vh - 56px);
+    border:1px solid black;
   }
   </style>
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
@@ -20,16 +22,16 @@
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title">App Name</span>
+        <span class="mdl-layout-title">SkYsCheGular</span>
         <div class="mdl-layout-spacer"></div>
       </div>
     </header>
     <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">App Name</span>
+      <span class="mdl-layout-title">SkYsCheGular</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="">Home</a>
-        <a class="mdl-navigation__link" href="">Schedule a Flight</a>
-        <a class="mdl-navigation__link" href="">Flight Information</a>
+        <a class="mdl-navigation__link" href="Homepage.html">Home</a>
+        <a class="mdl-navigation__link" href="Scheduling_The_Flight.html">Schedule a Flight</a>
+        <a class="mdl-navigation__link" href="Fleet%20Info2.html">Flight Information</a>
       </nav>
     </div>
   </div>
@@ -41,12 +43,12 @@
     <div class="mdl-cell mdl-cell--7-col">
       <br>
       <br>
-      <h3>Welcome to 'App Name'</h3>
-      <h4>Admist  the global  pandemic we are dedicated to  bringing you the most reliable and best service.'App Name' makes scheduling a flight now quick and easy.  </h4>
+      <h3>Welcome to SkYsCheGular</h3>
+      <h4>Admist  the global  pandemic we are dedicated to  bringing you the most reliable and best service.The app makes scheduling a flight now quick and easy.  </h4>
       </div
 
       <div class="mdl-cell mdl-cell--2-col">
-        <img src="plane.jpg" alt="plane logo" width="250" height="250">
+        <img src="Images/plane.jpg" alt="plane logo" width="250" height="250">
       </div>
 
     <div class="mdl-grid">
@@ -58,10 +60,13 @@
 
     </div>
 
-    <div id="map">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--4-col">
+        <div id="map"></div>
+      </div>
     </div>
 
-    <script src="HP/map.js"></script>
+    <script src="JS/HP_map.js"></script>
 
   </body>
 
