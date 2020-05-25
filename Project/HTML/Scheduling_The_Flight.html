@@ -40,17 +40,25 @@
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--4-col">
             <h2>Schedule a Flight</h2>
-            <label for id="date">Date</label>
-            <input type="date" value="" id="date">
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="date" id="date">
+              <label class="mdl-textfield__label" for="date"></label>
+            </div>
             <br></br>
-            <label for id="time">Time</label>
-            <input type="time"  value="" id="time">
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="time" id="time">
+              <label class="mdl-textfield__label" for="time"></label>
+            </div>
             <br></br>
-            <label for ="country">Country</label>
-            <input type="text"  id="country">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="country">
+              <label class="mdl-textfield__label" for="country">Country</label>
+            </div>
             <br></br>
-            <label for ="city">City</label>
-            <input type="text"  id="city">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="City">
+              <label class="mdl-textfield__label" for="city">City</label>
+            </div>
             <br></br>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="search" onclick="positionCallback()">
               Search
