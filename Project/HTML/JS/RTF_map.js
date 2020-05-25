@@ -82,14 +82,31 @@ class RouteList
   set arrivalTime(newArrivalTime) { this._arrivalTime=newArrivalTime;}
   set departureTime(newDepartureTime) {this._departureTime=newDepartureTime;}
 
-  addWaypoints(waypoints){}
-  deleteRoute(){}
-  displayRoutes(){}
-  dispaydepature(){}
-  dispayArrivalTime(){}
-  toString(){}
+  deleteRoute()
+  {
+    localStorage.removeItem("routeInformation") //remove data about route
+  }
 
-}
+
+  //  Display feature function apply to all
+  displayItem() {
+    //retrieve Information
+    let displayItem =
+    sessionStorage.getItem("gfg");
+    //display item
+    document.getElementById(
+      "coloumn_on_table").innerHTML = displayItem
+    }
+
+    dispaydepature(){}
+    dispayArrivalTime(){}
+    let routeInformation="";
+    toString()
+    {
+      routeInformation += "origin: ,destination:, waypoints:, arrival time:, departure time:, total distance:" //add retrieval of information
+      return routeInformation
+    }
+  }
 
 class WeatherInformation
 {
