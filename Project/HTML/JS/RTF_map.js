@@ -76,11 +76,11 @@ function weatherCallback(weather)
     get departureTime() {return this._departureTime;}
     get totalDistance() {return this._totalDistance;}
 
-    set origin(newOrigin) {return this._origin=newOrigin;}
-    set destination(newDestination) {return this._destination=newDestination;}
-    set waypoints(newWaypoints) {return this._waypoints=newWaypoints;}
-    set arrivalTime(newArrivalTime) {return this._arrivalTime=newArrivalTime;}
-    set departureTime(newDepartureTime) {return this._departureTime=newDepartureTime;}
+    set origin(newOrigin) { this._origin=newOrigin;}
+    set destination(newDestination) {this._destination=newDestination;}
+    set waypoints(newWaypoints) { this._waypoints=newWaypoints;}
+    set arrivalTime(newArrivalTime) { this._arrivalTime=newArrivalTime;}
+    set departureTime(newDepartureTime) {this._departureTime=newDepartureTime;}
 
     addWaypoints(waypoints){}
     deleteRoute(){}
@@ -95,41 +95,62 @@ function weatherCallback(weather)
   {}
 
   class PlaneList
-  {}
+  {
+
+  }
 
   class InformationOfAirplane
   {
-    constructor(model,speed,manufacturer,company,availability, capacity, flyingRange,locationOfAirplane)
-    {
-      this._model=model;
-      this._speed=speed;
-      this._manufacturer=manufactuer;
-      this._company=company;
-      this._availability=availability;
-      this._capacity=capacity;
-      this._flyingRange=flyingRange;
-      this._locationOfAirplane=flyingRange;
-    }
+    constructor(model,speed,manufacturer,company,availability, capacity,flyingRange)
+     {
+        this._model = model;
+        this._speed = speed;
+        this._manufacturer=manufactuer;
+        this._company=company;
+        this._availability=availability;
+        this._capacity=capacity;
+        this._flyingRange=flyingRange;
+        this._timeNeeded =0;
+      }
+        get model(){return this._model;}
+        get speed(){return this._speed;}
+        get manufactuer(){return this._manufacturer;}
+        get company(){return this._company;}
+        get availability(){return this._availability;}
+        get capacity(){return this._capacity;}
+        get flyingRange(){return this.flyingRange;}
+        get timeNeeded(){return this._timeNeeded;}
 
-    get model() {return this._model;}
-    get speed() {return this._speed;}
-    get manufactuer(){return this._manufacturer;}
-    get company () {return this._company;}
-    get availability() {return this._availability;}
-    get capacity(){return this._capacity;}
-    get flyingRange(){return this._flyingRange;}
-    get locationOfAirplane() {return this._locationOfAirplane;}
+        set model(newModel){this._model=newModel;}
+        set speed(newSpeed){this._speed=newSpeed;}
+        set manufactuer(newManufacturer){ this._manufacturer=newManufacturer;}
+        set company(newCompany){ this._company=newCompany;}
+        set availability(newAvailabilty){ this._availability=newAvailabilty;}
+        set capacity(newCapacity){ this._capacity=newCapacity;}
+        set flyingRange(newFlyingRange){this.flyingRange=newFlyingRange;}
+        set timeNeeded(newTime){this._timeNeeded= newTime;}
 
-
-    set availability(newAvailabilty) {return this._availability=newAvailabilty;}
-    set flyingRange(newFlyingRange){return this._flyingRange=newFlyingRange;}
-    set locationOfAirplane(newLocationOfAirplane) {return this._locationOfAirplane=newLocationOfAirplane;}
-
-    addFlights(){}
-    toString(){}
-    displayInformation(){}
+        addFlights(){}
+        toString(){}
+        displayInformation(){}
 
   }
 
   class CooridinateOfLocation
-  {}
+  {
+    constructor(lng1,lat1,alt1,lng2,lat2,alt2)
+    {
+      this._location1=[lng1,lat1,alt1]
+      this._location2=[lng2,lat2,alt2]
+      this._distance = 0
+    }
+      get location1(){return this._location1}
+      get location2(){return this._location2}
+      get distance(){return this._distance}
+
+
+      set location1(newLng1,newlat1,newAlt1){this._location1=[newLng1,newlat1,newAlt1]}
+      set location2(newLng2,newlat2,newAlt2){this._location1=[newLng2,newlat2,newAlt2]}
+      set distance(newDitance){this._distance=newDistance}
+
+  }
