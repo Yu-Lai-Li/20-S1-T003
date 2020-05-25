@@ -177,18 +177,35 @@ class InformationOfAirplane
 
 }
 
-class CooridinateOfLocation
-{
-  constructor(lng1,lat1,alt1,lng2,lat2,alt2)
+class CoordinateOfLocation
   {
-    this._location1=[lng1,lat1,alt1];
-    this._location2=[lng2,lat2,alt2];
-    this._distance =0;
+    constructor(lng1,lat1,lng2,lat2)
+    {
+      this._location1=[lng1,lat1];
+      this._location2=[lng2,lat2];
+      this._distance =0;
+    }
+      get location1(){return this._location1;}
+      get location2(){return this._location2;}
+      get distance(){return this._distance;}
+
+
+      set distance(newDistance){this._distance=newDistance;}
+
+	  calculateDistance()
+	  {
+		 let R = 6371e3;
+		 let φ1 = this.location1[1] * Math.PI/180;
+		 let φ2 = this.location2[1] * Math.PI/180;
+		 let Δφ = (this.location2[1]-this.location1[1]) * Math.PI/180;
+		 let Δλ = (this.location2[0]-this.location1[0]) * Math.PI/180;
+		 let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) *Math.sin(Δλ/2) * Math.sin(Δλ/2);
+		 let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		 let distance =(R * c)/1000;
+	  	 let output="";
+		 output+= distance+"Km";
+		 return output;
+	  }
   }
-  get location1(){return this._location1;}
-  get location2(){return this._location2;}
-  get distance(){return this._distance;}
 
-
-  set distance(newDistance){this._distance=newDistance;}
 }
