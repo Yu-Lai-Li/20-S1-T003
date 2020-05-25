@@ -41,30 +41,18 @@
           <div class="mdl-cell mdl-cell--4-col">
             <h2>Schedule a Flight</h2>
             <label for id="date">Date</label>
-            <input type="date" name="" value="" id="date">
+            <input type="date" value="" id="date">
             <br></br>
             <label for id="time">Time</label>
-            <input type="time" name="" value="" id="time">
+            <input type="time"  value="" id="time">
             <br></br>
             <label for id="country">Country</label>
-            <select  id ="country" >
-              <option value="null">select one</option>
-              <option value="Australia">Australia</option>
-              <option value="New Zealand" >New Zealand</option>
-              <option value="Malaysia" >Malaysia</option>
-              <option value="China" >China</option>
-            </select>
+            <input type="text"   id="country">
             <br></br>
-            <label for id="airport">Airport</label>
-            <select  id ="airport" >
-              <option value="null">select one</option>
-              <option value="Australia">Melborne</option>
-              <option value="New Zealand" >New Zealand</option>
-              <option value="Malaysia" >Malaysia</option>
-              <option value="China" >China</option>
-            </select>
+            <label for id="city">City</label>
+            <input type="text"   id="city">
             <br></br>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="back" onclick="search()">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="search" onclick="positionCallback()">
               Search
             </button>
 
@@ -97,7 +85,7 @@
             </button>
           </div>
           <div class="mdl-cell mdl-cell--1-col">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="back">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="confirm">
               ConfirmFlight
             </button>
           </div>
@@ -108,6 +96,6 @@
       </div>
     </main>
   </div>
-  <script type="text/javascript" src="JS/STF_map.js"></script>
+  <script type="text/javascript" src="STF_map.js"></script>
 </body>
 </html>
