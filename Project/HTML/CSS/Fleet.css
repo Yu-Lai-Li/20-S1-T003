@@ -1,0 +1,38 @@
+body{
+  font-family: "Times New Roman", Times, serif;
+
+}
+.serif{
+  font-family: "Times New Roman", Times, serif;
+}
+
+table{
+  border-radius: 25px
+}
+th{
+  background-color: rgb(211, 211, 211);
+  font-weight: bold;
+}
+
+th, td{
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  width: 450px;
+  height: 75px;
+  padding: 5px;
+  font-size: 24px
+
+}
+
+/*
+not sure about the show per page
+*/
+
+.pagination{
+  display: inline-block;
+  align-self: center;
+  color: black;
+  float: left;
+  padding: 25px 50px;
+  text-decoration: none;
+}
