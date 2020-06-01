@@ -1,5 +1,8 @@
 const FLIGHT_INDEX_KEY = "flightIndex";
 const FLIGHT_DATA_KEY = "flightData";
+const ROUTE_INDEX_KEY = "routeIndex";
+const ROUTE_DATA_KEY = "routeData";
+
 // webServiceRequest
 function webServiceRequest(url,data)
 {
@@ -33,6 +36,7 @@ function updateLocalStorage(data)
   if (typeof(Storage) !== "undefined")
   {
     localStorage.setItem(`${FLIGHT_DATA_KEY}`,JSON.stringify(data));
+    localStorage.setItem(`${ROUTE_DATA_KEY}`,JSON.stringify(data));
   }
   else
   {
@@ -40,9 +44,14 @@ function updateLocalStorage(data)
   }
 }
 //get infomation from localStorage
-function getDataLocalStorage()
+function getFlightDataLocalStorage()
 {
   let data = JSON.parse(localStorage.getItem(`${FLIGHT_DATA_KEY}`));
+  return data;
+}
+unction getRouteDataLocalStorage()
+{
+  let data = JSON.parse(localStorage.getItem(`${ROUTE_DATA_KEY}`));
   return data;
 }
 //checkIfDataExistsLocalStorage
