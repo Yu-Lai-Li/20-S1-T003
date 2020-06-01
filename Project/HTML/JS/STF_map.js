@@ -6,26 +6,39 @@ let map = new mapboxgl.Map({
         center: [145.135844,-37.911103],
         zoom: 11
 });
-
-function positionCallback(position)
+//locate user
+if('geolocation' in navigator)
 {
-  let countryRef=document.getElementById("country");
-  let cityRef=document.getElementById("city");
-  let country=countryRef.value;
-  let city =cityRef.value;
+  navigator.geolocation.getCurrentPosition(currentLocationCallback);
+}
+else
+{
+  alert("Geolocation Is Not Available");
+}
+
+function currentLocationCallback(position)
+{
+  let lat = position.coords.latitude;
+  let lng = position.coords.longitude;
+  map.panTo([lng,lat]);
+}
+//locate Airport
+function positionCallback()
+{
   let url ="https://eng1003.monash/api/v1/airports/";
   let data =
   {
     u: "ylii0235",
     key: DARKSKY_KEY,
-    country:country,
-    city:city,
-    callback: "airportCallback"
+    country:"",
+    city:"",
+    callback: "updateAirportsLocalStorage"
   };
   webServiceRequest(url,data);
 }
-  let currentMarkers=[];
-function airportCallback(data)
+let currentMarkers=[];
+let airportsData=getAirportsDataLocalStorage();
+function locateAirport()
 {
   if (currentMarkers.length>0)
   {
@@ -35,12 +48,12 @@ function airportCallback(data)
     }
   }
 
-  for (let i = 0; i < data.length; i++)
+  for (let i = 0; i < airportsData.length; i++)
   {
     let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
     let popup = new mapboxgl.Popup({ offset: 20});
-  	marker.setLngLat([data[i].longitude,data[i].latitude]);
-    let text=`${data[i].airportCode}<br>${data[i].name}`
+  	marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
+    let text=`${airportsData[i].airportCode}<br>${airportsData[i].name}`
     popup.setHTML(text);
     marker.setPopup(popup);
 
@@ -52,29 +65,42 @@ function airportCallback(data)
 }
 
 
-
-/*function airplaneCallback()
+//locate Airplane
+function airplaneCallback()
 {
-  let url ="https://eng1003.monash/api/v1/airplane/";
+  let url ="https://eng1003.monash/api/v1/planes/";
   let data =
   {
     u: "ylii0235",
     key: DARKSKY_KEY,
-    callback: "locateAirplane"
+    callback: "updateAirplanesLocalStorage"
   };
   webServiceRequest(url,data);
 }
-function locateAirplane(data)
+let airplanes=getAirplanesDataLocalStorage().airplanes;
+function locateAirplane()
 {
-  for (let i = 0; i < data.length; i++)
+  for(let i=0;i<airplanes.length;i++)
   {
-  	let popup = new mapboxgl.Popup({ offset: 45});
-  	popup.setText(data[i].id);
-  	marker.setPopup(popup);
-  	marker.addTo(map);
-  	popup.addTo(map);
+    for(let k=0;k<airportsData.length;k++)
+    {
+      if(airplanes[i].location==airportsData[k].airportCode)
+      {
+        let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+        let popup = new mapboxgl.Popup({ offset: 20});
+      	marker.setLngLat([airportsData[k].longitude,airportsData[k].latitude]);
+        let text=`${airplanes[i].id}<br>${airplanes[i].location}`
+        popup.setHTML(text);
+        marker.setPopup(popup);
+
+        marker.addTo(map);
+        popup.addTo(map);
+      }
+    }
   }
-}*/
+}
+
+
 function calculateDistance()
 {
 		 let R = 6371e3;
@@ -87,3 +113,6 @@ function calculateDistance()
 		 let distance =(R * c)/1000;
      return distance;
 }
+window.addEventListener("load",function(){positionCallback()})
+window.addEventListener("load",function(){airplaneCallback()})
+window.addEventListener("load",function(){locateAirplane()})
