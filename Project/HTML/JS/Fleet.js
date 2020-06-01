@@ -18,8 +18,6 @@ function processPlaneData(object)
 */
 
 //PLanes Class not sure what to do here
-
-
 class Plane
 {
 	constructor(id,reg,loc,range,speed,type,status,airline)
@@ -168,14 +166,14 @@ function docTable()
 	<table class="mdl-data-table mdl-js-data-table" id = "fleetTable">
 		<thead>
 			<tr>
-				<th class="mdl-data-table__cell--non-numeric">Airline</th>
-				<th class="mdl-data-table__cell">ID</th>
-				<th class="mdl-data-table__cell--non-numeric">Registration</th>
-				<th class="mdl-data-table__cell--non-numeric">Type</th>
-				<th class="mdl-data-table__cell--non-numeric">Location</th>
-				<th class="mdl-data-table__cell">Range</th>
-				<th class="mdl-data-table__cell">Average Speed</th>
-				<th class="mdl-data-table__cell--non-numeric">Status</th>
+				<th class="mdl-data-table__cell--non-numeric" id ="tableAir" onclick="sortTableByAirline()">Airline</th>
+				<th class="mdl-data-table__cell" id="tableID" onclick="sortTableById()">ID</th>
+				<th class="mdl-data-table__cell--non-numeric" id="tableReg" onclick="sortTableByRegistration()">Registration</th>
+				<th class="mdl-data-table__cell--non-numeric" id="tableType" onclick="sortTableByType()" >Type</th>
+				<th class="mdl-data-table__cell--non-numeric" id="tableLoc" onclick="sortTableByLocation()">Location</th>
+				<th class="mdl-data-table__cell" id="tableRange" onclick= "sortTableByRange()">Range</th>
+				<th class="mdl-data-table__cell" id="tableSpeed" onclick="sortTableByAvgSpeed()">Average Speed</th>
+				<th class="mdl-data-table__cell--non-numeric" id="tableStatus" onclick="sortTableByStatus">Status</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -192,7 +190,7 @@ function docTable()
 			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].location}</td>
 			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].range}</th>
 			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].avgSpeed}</th>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].status}</td>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].status.toUpperCase()}</td>
 		</tr>
 		`;
 	}
@@ -397,3 +395,14 @@ function sortTableByAirline()
 	removeTable();
 	docTable();
 }
+
+document.getElementById("tableAir").addEventListener('click', sortTableByAirline());
+document.getElementById("tableID").addEventListener('click',sortTableById());
+document.getElementById("tableReg").addEventListener('click',sortTableByRegistration());
+document.getElementById("tableType").addEventListener('click',sortTableByType());
+document.getElementById("tableLoc").addEventListener('click',sortTableByLocation());
+document.getElementById("tableRange").addEventListener('click',sortTableByRange());
+document.getElementById("tableSpeed").addEventListener('click',sortTableByAvgSpeed());
+document.getElementById("tableStatus").addEventListener('click',sortTableByStatus());
+
+sortTableById();

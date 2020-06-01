@@ -58,3 +58,5 @@ function checkIfDataExistsLocalStorage()
     return false;
   }
 }
+
+//Plane Class
