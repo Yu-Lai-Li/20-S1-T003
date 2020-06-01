@@ -44,7 +44,6 @@ function airportCallback(data)
       currentMarkers[i].remove();
     }
     currentMarkers.push(marker)
-
   }
 }
 
