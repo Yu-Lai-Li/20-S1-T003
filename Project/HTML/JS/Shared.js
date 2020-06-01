@@ -31,11 +31,21 @@ function webServiceRequest(url,data)
     document.body.appendChild(script);
 }
 //update LocalStorage
-function updateLocalStorage(data)
+function updateFlightLocalStorage(flightData)
 {
   if (typeof(Storage) !== "undefined")
   {
     localStorage.setItem(`${FLIGHT_DATA_KEY}`,JSON.stringify(data));
+  }
+  else
+  {
+    console.log("localStorage is not supported by current browser.");
+  }
+}
+function updateRouteLocalStorage(routeData)
+{
+  if (typeof(Storage) !== "undefined")
+  {
     localStorage.setItem(`${ROUTE_DATA_KEY}`,JSON.stringify(data));
   }
   else
