@@ -78,6 +78,11 @@ function airplaneCallback()
   webServiceRequest(url,data);
 }
 let airplanes=getAirplanesDataLocalStorage().airplanes;
+function search()
+{
+  countryRef=document.getElementById("country")
+  cityRef=document.getElementById("city")
+}
 let currentMarkers1=[];
 function locateAirplane()
 {
@@ -103,7 +108,6 @@ function locateAirplane()
         marker.addTo(map);
         popup.addTo(map);
         currentMarkers1.push(marker)
-        console.log(currentMarkers1)
       }
     }
   }
