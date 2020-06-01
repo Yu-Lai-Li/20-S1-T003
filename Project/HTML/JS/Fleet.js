@@ -59,7 +59,6 @@ class Plane
 	{
 		return this._airline;
 	}
-
 	set id(newId)
 	{
 		this._id = newId;
@@ -143,7 +142,7 @@ let SkyPlanes = new PlaneList();
 function addPlanes()
 {
 	let planeStringLocal = localStorage.getItem("planeKey");
-	let planeData = JSON.parse(planeStringLocal);4
+	let planeData = JSON.parse(planeStringLocal);
 	console.log(planeData.airplanes[0].id);
 	for (let i=0; i<planeData.airplanes.length; i++)
 	{
@@ -204,30 +203,6 @@ function docTable()
 
 docTable();
 
-//need to make my own search Function
-function search()
-{
-let input = document.getElementById("search");
-let filter = input.value.toUpperCase();
-let table = document.getElementById("fleetTable");
-let tr = table.getElementsByTagName("tr");
-for (i = 0; i < tr.length; i++)
-{
-	let td = tr[i].getElementsByTagName("td")[0] ;
-	if (td)
-	{
-		let txtValue = td.textContent || td.innerText;
-		if (txtValue.toUpperCase().indexOf(filter) > -1)
-		{
-			tr[i].style.display = "";
-		}
-		else
-		{
-			tr[i].style.display = "none";
-		}
-	}
-}
-}
 //need to make my own table
 function removeTable()
 {
@@ -404,5 +379,46 @@ document.getElementById("tableLoc").addEventListener('click',sortTableByLocation
 document.getElementById("tableRange").addEventListener('click',sortTableByRange());
 document.getElementById("tableSpeed").addEventListener('click',sortTableByAvgSpeed());
 document.getElementById("tableStatus").addEventListener('click',sortTableByStatus());
+
+function sortBySelect()
+{
+	let sortSelectRef = document.getElementsByName("sort by");
+	function GetSelectedValue()
+	{
+		let sortRef = document.getElementById("sortSelect");
+		var sortSelectValue = sortRef.options[sortRef.selectedIndex].value;
+		if (sortSelectValue="airline")
+		{
+			sortTableByAirline();
+		}
+		else if (sortSelectValue="id")
+		{
+			sortTableById();
+		}
+		else if (sortSelectValue="registration")
+		{
+			sortTableByRegistration();
+		}
+		else if (sortSelectValue="type")
+		{
+			sortTableByType();
+		}
+		else if (sortSelectValue="location")
+		{
+			sortTableByLocation();
+		}
+		else if (sortSelectValue="avgSpeed")
+		{
+			sortTableByAvgSpeed();
+		}
+		else if (sortSelectValue="status")
+		{
+			sortTableByStatus();
+		}
+
+	}
+
+
+}
 
 sortTableById();
