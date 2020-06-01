@@ -78,6 +78,7 @@ function airplaneCallback()
   webServiceRequest(url,data);
 }
 let airplanes=getAirplanesDataLocalStorage().airplanes;
+let currentMarkers1=[];
 function locateAirplane()
 {
   for(let i=0;i<airplanes.length;i++)
@@ -95,6 +96,7 @@ function locateAirplane()
 
         marker.addTo(map);
         popup.addTo(map);
+        currentMarkers.push(marker)
       }
     }
   }
