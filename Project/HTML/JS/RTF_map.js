@@ -178,7 +178,7 @@ calculateDistance()
 		 return this.distance;
 }
 
-function storeFleetInformation()
+function updateFleetInformation()
 {
-  let fleetInformation = JOSN.parse(localStorage.getItem("fleet-data"))
+   localStorage.getItem("fleet-data"))
 }
