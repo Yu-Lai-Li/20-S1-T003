@@ -24,6 +24,7 @@ function positionCallback(position)
   };
   webServiceRequest(url,data);
 }
+
 function webServiceRequest(url,data)
 {
     let params = "";
@@ -50,22 +51,24 @@ function webServiceRequest(url,data)
     script.src = url + params;
     document.body.appendChild(script);
 }
+
 function airportCallback(data)
 {
   for (let i = 0; i < data.length; i++)
   {
-  	let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+    let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+    let popup = new mapboxgl.Popup({ offset: 20});
   	marker.setLngLat([data[i].longitude,data[i].latitude]);
+    let text=`${data[i].airportCode}:${data[i].name}`
+    popup.setText(text);
+    marker.setPopup(popup);
 
-  	let popup = new mapboxgl.Popup({ offset: 45});
-  	popup.setText(data[i].airportCode);
-
-  	marker.setPopup(popup);
-  	marker.addTo(map);
-  	popup.addTo(map);
+    marker.addTo(map);
+    popup.addTo(map);
   }
 }
-function airplaneCallback()
+
+/*function airplaneCallback()
 {
   let url ="https://eng1003.monash/api/v1/airplane/";
   let data =
@@ -82,9 +85,8 @@ function locateAirplane(data)
   {
   	let popup = new mapboxgl.Popup({ offset: 45});
   	popup.setText(data[i].id);
-
   	marker.setPopup(popup);
   	marker.addTo(map);
   	popup.addTo(map);
   }
-}
+}*/

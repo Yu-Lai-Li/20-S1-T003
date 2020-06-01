@@ -43,11 +43,11 @@ function weatherCallback(weather)
 
 class RouteList
 {
-  constructor(origin="",destination="",waypoints="",arrivalTime=0,departureTime=0,totalDistance=0)
+  constructor(origin="",destination="",arrivalTime=0,departureTime=0,totalDistance=0)
   {
     this._origin=origin;
     this._destination=destination;
-    this._waypoints=waypoints;//waypoints in array list
+    this._waypoints=[];//waypoints in array list
     this._arrivalTime=arrivalTime;
     this._departureTime=departureTime;
     this._totalDistance=totalDistance;
@@ -72,7 +72,10 @@ class RouteList
     localStorage.removeItem("routeInformation") //remove data about route
   }
 
-
+  addWayPoints(platform)
+  {
+    this.waypoints.push(platform);
+  }
   //  Display feature function apply to all
   displayItem() {
     //retrieve Information
@@ -162,23 +165,8 @@ class InformationOfAirplane
 
 }
 
-class CoordinateOfLocation
-  {
-    constructor(lng1,lat1,lng2,lat2)
-    {
-      this._location1=[lng1,lat1];
-      this._location2=[lng2,lat2];
-      this._distance =0;
-    }
-      get location1(){return this._location1;}
-      get location2(){return this._location2;}
-      get distance(){return this._distance;}
-
-
-      set distance(newDistance){this._distance=newDistance;}
-
-	  calculateDistance()
-	  {
+calculateDistance()
+{
 		 let R = 6371e3;
 		 let φ1 = this.location1[1] * Math.PI/180;
 		 let φ2 = this.location2[1] * Math.PI/180;
@@ -187,23 +175,7 @@ class CoordinateOfLocation
 		 let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) *Math.sin(Δλ/2) * Math.sin(Δλ/2);
 		 let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		 this.distance =(R * c)/1000;
-
 		 return this.distance;
-	  }
-	  toString()
-	  {}
-  }
-}
-
-class Time
-{
-  constructor(date)
-  {
-    this._date =""
-  }
-  get date(){return this._date;}
-
-  set date(newDate){this._date = newDate;}
 }
 
 function storeFleetInformation()
