@@ -81,7 +81,6 @@ function displayHistoricalMarker()
     marker.addTo(map);
     currentHistoricalMarkers.push(marker);
 
-
     //  popup.addTo(map); if we need to display pop up information on click
   }
 }
@@ -109,8 +108,9 @@ function displayScheduledPolyline()
     type: "line",
     source: object,
     layout: { "line-join": "round", "line-cap": "round" },
-    paint: { "line-color": "#FF6347", "line-width": 6 }
+    paint: { "line-color": "#008000", "line-width": 6 }
   });
+    map.on('click','routes',function(){window.location="Flight_Information_Summary.html"});
 }
 function displayHistoricalPolyline()
 {
@@ -138,6 +138,7 @@ function displayHistoricalPolyline()
     layout: { "line-join": "round", "line-cap": "round" },
     paint: { "line-color": "#FF8C00", "line-width": 6 }
   });
+  map.on('click','historical',function(){window.location="Flight_Information_Summary.html"});
 }
 
 function displayRoute() {
