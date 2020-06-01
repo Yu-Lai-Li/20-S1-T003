@@ -18,6 +18,8 @@ function processPlaneData(object)
 */
 
 //PLanes Class not sure what to do here
+
+
 class Plane
 {
 	constructor(id,reg,loc,range,speed,type,status,airline)
@@ -90,31 +92,7 @@ class Plane
 	}
 }
 
-/*	NOT WORKING
-function definePlanesInClass()
-{
-	let planeStringLocal = localStorage.getItem("planeKey");
-	let planeData = JSON.parse(planeStringLocal);4
-	console.log(planeData.airplanes[0].id);
-	for (let i=0; i<planeData.airplanes.length; i++)
-	{
-		let plane = new Plane
-		(
-			planeData.airplanes[i].id,
-			planeData.airplanes[i].registration,
-			planeData.airplanes[i].location,
-			planeData.airplanes[i].range,
-			planeData.airplanes[i].avgSpeed,
-			planeData.airplanes[i].type,
-			planeData.airplanes[i].status,
-			planeData.airplanes[i].airline
-		);
-	}
-definePlanesInClass();
-*/
-
-
-class planeList
+class PlaneList
 {
 	constructor()
 	{
@@ -135,8 +113,35 @@ class planeList
 		this._planeList.push(plane);
 	}
 }
-SkyPlanes = new planeList()
-//Add planes to list
+
+let SkyPlanes = new PlaneList();
+/*function definePlanesInClass()
+{
+	let planeStringLocal = localStorage.getItem("planeKey");
+	let planeData = JSON.parse(planeStringLocal);4
+	console.log(planeData.airplanes[0].id);
+	for (let i=0; i<planeData.airplanes.length; i++)
+	{
+		let plane = new Plane (
+			planeData.airplanes[i].id,
+			planeData.airplanes[i].registration,
+			planeData.airplanes[i].location,
+			planeData.airplanes[i].range,
+			planeData.airplanes[i].avgSpeed,
+			planeData.airplanes[i].type,
+			planeData.airplanes[i].status,
+			planeData.airplanes[i].airline
+		);
+
+		SkyPlanes.addPlane(plane);
+		console.log(SkyPlanes.planeList)
+	}
+}
+*/
+
+
+
+
 function addPlanes()
 {
 	let planeStringLocal = localStorage.getItem("planeKey");
@@ -150,8 +155,9 @@ function addPlanes()
 	console.log(SkyPlanes.planeList[0].type);
 	console.log(SkyPlanes.planeList[4].avgSpeed);
 }
-
 addPlanes()
+
+
 //Table
 function docTable()
 {
@@ -271,7 +277,6 @@ function sortArrayByLocation(a,b)
 	return 0
 }
 
-//constructor(id,reg,loc,range,speed,type,status,airline)
 function sortArrayByRange(a,b)
 {
 	if(a.range < b.range)
