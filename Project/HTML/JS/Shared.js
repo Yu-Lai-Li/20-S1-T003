@@ -59,7 +59,7 @@ function getFlightDataLocalStorage()
   let data = JSON.parse(localStorage.getItem(`${FLIGHT_DATA_KEY}`));
   return data;
 }
-unction getRouteDataLocalStorage()
+function getRouteDataLocalStorage()
 {
   let data = JSON.parse(localStorage.getItem(`${ROUTE_DATA_KEY}`));
   return data;
