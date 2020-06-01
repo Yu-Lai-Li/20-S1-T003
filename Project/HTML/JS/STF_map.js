@@ -25,46 +25,26 @@ function positionCallback(position)
   webServiceRequest(url,data);
 }
 
-function webServiceRequest(url,data)
-{
-    let params = "";
-    for (let key in data)
-    {
-        if (data.hasOwnProperty(key))
-        {
-            if (params.length == 0)
-            {
-                params += "?";
-            }
-            else
-            {
-                params += "&";
-            }
-
-            let encodedKey = encodeURIComponent(key);
-            let encodedValue = encodeURIComponent(data[key]);
-
-            params += encodedKey + "=" + encodedValue;
-         }
-    }
-    let script = document.createElement('script');
-    script.src = url + params;
-    document.body.appendChild(script);
-}
-
 function airportCallback(data)
 {
+  let currentMarkers=[];
   for (let i = 0; i < data.length; i++)
   {
     let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
     let popup = new mapboxgl.Popup({ offset: 20});
   	marker.setLngLat([data[i].longitude,data[i].latitude]);
-    let text=`${data[i].airportCode}:${data[i].name}`
-    popup.setText(text);
+    let text=`${data[i].airportCode}<br>${data[i].name}`
+    popup.setHTML(text);
     marker.setPopup(popup);
 
     marker.addTo(map);
     popup.addTo(map);
+    if (currentMarkers.length>0)
+    {
+      currentMarkers[i].remove();
+    }
+    currentMarkers.push(marker)
+
   }
 }
 
@@ -90,7 +70,7 @@ function locateAirplane(data)
   	popup.addTo(map);
   }
 }*/
-calculateDistance()
+function calculateDistance()
 {
 		 let R = 6371e3;
 		 let φ1 = this.location1[1] * Math.PI/180;
@@ -99,6 +79,6 @@ calculateDistance()
 		 let Δλ = (this.location2[0]-this.location1[0]) * Math.PI/180;
 		 let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) *Math.sin(Δλ/2) * Math.sin(Δλ/2);
 		 let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		 this.distance =(R * c)/1000;
-		 return this.distance;
+		 let distance =(R * c)/1000;
+     return distance;
 }
