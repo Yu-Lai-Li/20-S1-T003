@@ -24,10 +24,17 @@ function positionCallback(position)
   };
   webServiceRequest(url,data);
 }
-
+  let currentMarkers=[];
 function airportCallback(data)
 {
-  let currentMarkers=[];
+  if (currentMarkers.length>0)
+  {
+    for (let i = 0; i < currentMarkers.length; i++)
+    {
+    currentMarkers[i].remove();
+  }
+  }
+
   for (let i = 0; i < data.length; i++)
   {
     let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
@@ -39,13 +46,12 @@ function airportCallback(data)
 
     marker.addTo(map);
     popup.addTo(map);
-    if (currentMarkers.length>0)
-    {
-      currentMarkers[i].remove();
-    }
+
     currentMarkers.push(marker)
   }
 }
+
+
 
 /*function airplaneCallback()
 {
