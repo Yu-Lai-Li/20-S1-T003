@@ -1,72 +1,394 @@
+//Web service request
 let script = document.createElement('script');
 script.src = "https://eng1003.monash/api/v1/planes/?callback=processPlaneData";
 document.body.appendChild(script);
 
-//need help cant access any of this data
+//Save to local storage
 function processPlaneData(object)
 {
-	let outArea = document.getElementById("tableTen");
-	let output = ""
-	object.airplanes[0].id
+	const	PLANE_DATA_KEY = "planeKey"
+	let planeString = JSON.stringify(object);
+	localStorage.setItem("planeKey",planeString);
+}
+//Retrieve from local storage
+/*	WASNT WORKING
+	let planeStringLocal = localStorage.getItem("planeKey");
+	let planeData = JSON.parse(planeStringLocal);4
+	console.log(planeData.airplanes[0].id);
+*/
 
-	output +=
-	`<table id="myTable" align="center">
-		<script src = "https://www.w3schools.com/lib/w3.js"></script>
-		<tr>
-			<th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(1)')" style="cursor:pointer">Airline</th>
-			<th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(2)')" style="cursor:pointer">ID</th>
-			<th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(3)')" style="cursor:pointer">Registration</th>
-			<th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(4)')" style="cursor:pointer">Type</th>
-			<th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(5)')" style="cursor:pointer">Location</th>
-			<th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(6)')" style="cursor:pointer">Range</th>
-			<th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(7)')" style="cursor:pointer">Average Speed</th>
-			<th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(8)')" style="cursor:pointer">Status</th>
-		</tr>`
+//PLanes Class not sure what to do here
+class Plane
+{
+	constructor(id,reg,loc,range,speed,type,status,airline)
+	{
+		id = this._id;
+		reg = this._reg;
+		location = this._loc;
+		range = this._range;
+		speed = this._speed;
+		type = this._type;
+		status = this._status;
+		airline = this._airline;
+	}
+	get id()
+	{
+		return this._id;
+	}
+	get loc()
+	{
+		return this._loc;
+	}
+	get range()
+	{
+		return this._range;
+	}
+	get speed()
+	{
+		return this._speed;
+	}
+	get type()
+	{
+		return this._type;
+	}
+	get status()
+	{
+		return this._status;
+	}
+	get airline()
+	{
+		return this._airline;
+	}
 
-		for (i=0; i<object.airplanes.length; i++)
-		{
-			output +=
-			`<tr class="item">
-				<td>${object.airplanes[i].airline}</td>
-				<td>${object.airplanes[i].id}</td>
-				<td>${object.airplanes[i].registration}</td>
-				<td>${object.airplanes[i].type}</td>
-				<td>${object.airplanes[i].location}</td>
-				<td>${object.airplanes[i].range}</td>
-				<td>${object.airplanes[i].avgSpeed}</td>
-				<td>${object.airplanes[i].status}</td>
-			</tr>`;
-		}
-		console.log(output)
-		outArea.innerHTML = output;
+	set id(newId)
+	{
+		this._id = newId;
+	}
+	set loc(newLoc)
+	{
+		this._loc = newLoc;
+	}
+	set range(newRange)
+	{
+		this._range = newRange;
+	}
+	set speed(newSpeed)
+	{
+		this._speed = newSpeed;
+	}
+	set type(newType)
+	{
+		this.type = newType;
+	}
+	set status(newStatus)
+	{
+		this._status = newStatus;
+	}
+	set airline(newAirline)
+	{
+		this._airline = newAirline;
+	}
 }
 
-//need to make my own search Function
-//need to make my own table 
-	function search()
+/*	NOT WORKING
+function definePlanesInClass()
 {
-	let input = document.getElementById("search");
-	let filter = input.value.toUpperCase();
-	let table = document.getElementById("myTable");
-	let tr = table.getElementsByTagName("tr");
-	for (i = 0; i < tr.length; i++)
+	let planeStringLocal = localStorage.getItem("planeKey");
+	let planeData = JSON.parse(planeStringLocal);4
+	console.log(planeData.airplanes[0].id);
+	for (let i=0; i<planeData.airplanes.length; i++)
 	{
-		let td = tr[i].getElementsByTagName("td")[0] ;
-		if (td)
+		let plane = new Plane
+		(
+			planeData.airplanes[i].id,
+			planeData.airplanes[i].registration,
+			planeData.airplanes[i].location,
+			planeData.airplanes[i].range,
+			planeData.airplanes[i].avgSpeed,
+			planeData.airplanes[i].type,
+			planeData.airplanes[i].status,
+			planeData.airplanes[i].airline
+		);
+	}
+definePlanesInClass();
+*/
+
+
+class planeList
+{
+	constructor()
+	{
+		this._planeList = [];
+	}
+
+	get planeList()
+	{
+		return this._planeList;
+	}
+	get numberOfPlanes()
+	{
+		return this._planeList.length;
+	}
+
+	addPlane(plane)
+	{
+		this._planeList.push(plane);
+	}
+}
+SkyPlanes = new planeList()
+//Add planes to list
+function addPlanes()
+{
+	let planeStringLocal = localStorage.getItem("planeKey");
+	let planeData = JSON.parse(planeStringLocal);4
+	console.log(planeData.airplanes[0].id);
+	for (let i=0; i<planeData.airplanes.length; i++)
+	{
+		SkyPlanes.addPlane(planeData.airplanes[i]);
+	}
+	console.log(SkyPlanes.planeList);
+	console.log(SkyPlanes.planeList[0].type);
+	console.log(SkyPlanes.planeList[4].avgSpeed);
+}
+
+addPlanes()
+//Table
+function docTable()
+{
+	let output = "";
+	let tableRef= document.getElementById("fleetSection");
+	output +=
+	`
+	<table class="mdl-data-table mdl-js-data-table" id = "fleetTable">
+		<thead>
+			<tr>
+				<th class="mdl-data-table__cell--non-numeric">Airline</th>
+				<th class="mdl-data-table__cell">ID</th>
+				<th class="mdl-data-table__cell--non-numeric">Registration</th>
+				<th class="mdl-data-table__cell--non-numeric">Type</th>
+				<th class="mdl-data-table__cell--non-numeric">Location</th>
+				<th class="mdl-data-table__cell">Range</th>
+				<th class="mdl-data-table__cell">Average Speed</th>
+				<th class="mdl-data-table__cell--non-numeric">Status</th>
+			</tr>
+		</thead>
+		<tbody>
+	`;
+	for (let i=0;i<SkyPlanes.planeList.length;i++)
+	{
+		output +=
+		`
+		<tr>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].airline}</th>
+			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].id}</th>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].registration}</td>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].type}</td>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].location}</td>
+			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].range}</th>
+			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].avgSpeed}</th>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].status}</td>
+		</tr>
+		`;
+	}
+	output+= `
+		</tbody>
+	</table>`;
+	console.log(output);
+	tableRef.innerHTML = output;
+
+}
+
+docTable();
+
+//need to make my own search Function
+function search()
+{
+let input = document.getElementById("search");
+let filter = input.value.toUpperCase();
+let table = document.getElementById("fleetTable");
+let tr = table.getElementsByTagName("tr");
+for (i = 0; i < tr.length; i++)
+{
+	let td = tr[i].getElementsByTagName("td")[0] ;
+	if (td)
+	{
+		let txtValue = td.textContent || td.innerText;
+		if (txtValue.toUpperCase().indexOf(filter) > -1)
 		{
-			let txtValue = td.textContent || td.innerText;
-			if (txtValue.toUpperCase().indexOf(filter) > -1)
-			{
-				tr[i].style.display = "";
-			}
-			else
-			{
-				tr[i].style.display = "none";
-			}
+			tr[i].style.display = "";
+		}
+		else
+		{
+			tr[i].style.display = "none";
 		}
 	}
 }
-//For the show per page Function
-//We need something called Bootstrap Pagings
+}
+//need to make my own table
+function removeTable()
+{
+	let fleetTableRef = document.getElementById("fleetTable");
+	fleetTableRef.parentNode.removeChild(fleetTableRef);
+}
 
-//29 planes
+
+function sortArrayById(a,b)
+{
+	if(a.id < b.id)
+	{
+		return -1;
+	}
+	if (a.id > b.id)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByRegistration(a,b)
+{
+	if(a.registration < b.registration)
+	{
+		return -1;
+	}
+	if (a.registration > b.registration)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByLocation(a,b)
+{
+	if(a.location < b.location)
+	{
+		return -1;
+	}
+	if (a.location > b.location)
+	{
+		return 1;
+	}
+	return 0
+}
+
+//constructor(id,reg,loc,range,speed,type,status,airline)
+function sortArrayByRange(a,b)
+{
+	if(a.range < b.range)
+	{
+		return -1;
+	}
+	if (a.range > b.range)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByAvgSpeed(a,b)
+{
+	if(a.avgSpeed < b.avgSpeed)
+	{
+		return -1;
+	}
+	if (a.avgSpeed > b.avgSpeed)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByType(a,b)
+{
+	if(a.type < b.type)
+	{
+		return -1;
+	}
+	if (a.type > b.type)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByStatus(a,b)
+{
+	if(a.status < b.status)
+	{
+		return -1;
+	}
+	if (a.status > b.status)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByAirline(a,b)
+{
+	if(a.airline < b.airline)
+	{
+		return -1;
+	}
+	if (a.airline > b.airline)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortTableById()
+{
+	SkyPlanes.planeList.sort(sortArrayById);
+	removeTable();
+	docTable();
+}
+
+function sortTableByRegistration()
+{
+	SkyPlanes.planeList.sort(sortArrayByRegistration);
+	removeTable();
+	docTable();
+}
+
+function sortTableByLocation()
+{
+	SkyPlanes.planeList.sort(sortArrayByLocation);
+	removeTable();
+	docTable();
+}
+
+function sortTableByRange()
+{
+	SkyPlanes.planeList.sort(sortArrayByRange);
+	removeTable();
+	docTable();
+}
+
+function sortTableByType()
+{
+	SkyPlanes.planeList.sort(sortArrayByType);
+	removeTable();
+	docTable();
+}
+
+function sortTableByAvgSpeed()
+{
+	SkyPlanes.planeList.sort(sortArrayByAvgSpeed);
+	removeTable();
+	docTable();
+}
+
+function sortTableByStatus()
+{
+	SkyPlanes.planeList.sort(sortArrayByStatus);
+	removeTable();
+	docTable();
+}
+
+function sortTableByAirline()
+{
+	SkyPlanes.planeList.sort(sortArrayByAirline);
+	removeTable();
+	docTable();
+}
