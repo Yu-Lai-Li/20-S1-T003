@@ -31,8 +31,8 @@ function airportCallback(data)
   {
     for (let i = 0; i < currentMarkers.length; i++)
     {
-    currentMarkers[i].remove();
-  }
+      currentMarkers[i].remove();
+    }
   }
 
   for (let i = 0; i < data.length; i++)
