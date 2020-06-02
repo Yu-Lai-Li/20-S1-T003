@@ -91,7 +91,6 @@ function locateAirplane(data)
     }
   }
 }
-
 //Show Range of Airplane
 map.on('click', function(e) {
   let airportsData=getAirportsDataLocalStorage();
@@ -101,7 +100,6 @@ map.on('click', function(e) {
 
     if(coordinates.lng.toFixed(2)==airportsData[i].longitude.toFixed(2) && coordinates.lat.toFixed(2)==airportsData[i].latitude.toFixed(2))
     {
-      showRange(coordinates)
       showAirpotsInTheRange();
       showAvailableAirplane()
     }
@@ -186,3 +184,4 @@ function calculateTimeNeeded(speed)
 {
   //distancs/speed
 }
+window.addEventListener("load",function(){putAirplaneInAirport()})

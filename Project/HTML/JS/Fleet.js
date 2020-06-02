@@ -22,72 +22,30 @@ class Plane
 {
 	constructor(id,reg,loc,range,speed,type,status,airline)
 	{
-		id = this._id;
-		reg = this._reg;
-		location = this._loc;
-		range = this._range;
-		speed = this._speed;
-		type = this._type;
-		status = this._status;
-		airline = this._airline;
+			this._id=id;
+			this._reg=reg;
+	 		this._loc=loc;
+			this._range=range;
+			this._speed=speed;
+	 		this._type=type;
+			this._status=status;
+	 		this._airline=airline;
 	}
-	get id()
-	{
-		return this._id;
-	}
-	get loc()
-	{
-		return this._loc;
-	}
-	get range()
-	{
-		return this._range;
-	}
-	get speed()
-	{
-		return this._speed;
-	}
-	get type()
-	{
-		return this._type;
-	}
-	get status()
-	{
-		return this._status;
-	}
-	get airline()
-	{
-		return this._airline;
-	}
+	get id(){	return this._id;}
+	get loc(){return this._loc;}
+	get range(){return this._range;}
+	get speed(){return this._speed;}
+	get type(){return this._type;}
+	get status(){return this._status;}
+	get airline(){return this._airlin
 
-	set id(newId)
-	{
-		this._id = newId;
-	}
-	set loc(newLoc)
-	{
-		this._loc = newLoc;
-	}
-	set range(newRange)
-	{
-		this._range = newRange;
-	}
-	set speed(newSpeed)
-	{
-		this._speed = newSpeed;
-	}
-	set type(newType)
-	{
-		this.type = newType;
-	}
-	set status(newStatus)
-	{
-		this._status = newStatus;
-	}
-	set airline(newAirline)
-	{
-		this._airline = newAirline;
-	}
+	set id(newId){this._id = newId;}
+	set loc(newLoc){this._loc = newLoc;}
+	set range(newRange){this._range = newRange;}
+	set speed(newSpeed){this._speed = newSpeed;}
+	set type(newType){this.type = newType;}
+	set status(newStatus){this._status = newStatus;}
+	set airline(newAirline){this._airline = newAirline;}
 }
 
 class PlaneList
@@ -97,14 +55,8 @@ class PlaneList
 		this._planeList = [];
 	}
 
-	get planeList()
-	{
-		return this._planeList;
-	}
-	get numberOfPlanes()
-	{
-		return this._planeList.length;
-	}
+	get planeList(){return this._planeList;}
+	get numberOfPlanes(){return this._planeList.length;}
 
 	addPlane(plane)
 	{
