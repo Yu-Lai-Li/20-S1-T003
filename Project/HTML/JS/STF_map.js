@@ -22,23 +22,37 @@ function currentLocationCallback(position)
   let lng = position.coords.longitude;
   map.panTo([lng,lat]);
 }
-//locate Airport
+//locate Nearby Airport
 function positionCallback()
 {
+  let countryRef=document.getElementById("country")
+  let cityRef=document.getElementById("city")
   let url ="https://eng1003.monash/api/v1/airports/";
   let data =
   {
     u: "ylii0235",
     key: DARKSKY_KEY,
-    country:"",
-    city:"",
-    callback: "updateAirportsLocalStorage"
+    country:countryRef.value,
+    city:cityRef.value,
+    callback: "updateSelectedAirportsLocalStorage"
   };
   webServiceRequest(url,data);
 }
+//locate Nearby Airplane
+function airplaneCallback()
+{
+  let url ="https://eng1003.monash/api/v1/planes/";
+  let data =
+  {
+    u: "ylii0235",
+    key: DARKSKY_KEY,
+    callback: "locateAirplane"
+  };
+  webServiceRequest(url,data);
+}
+
 let currentMarkers=[];
-let airportsData=getAirportsDataLocalStorage();
-/*function locateAirport()
+function locateAirplane(data)
 {
   if (currentMarkers.length>0)
   {
@@ -47,71 +61,35 @@ let airportsData=getAirportsDataLocalStorage();
       currentMarkers[i].remove();
     }
   }
-
-  for (let i = 0; i < airportsData.length; i++)
-  {
-    let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
-    let popup = new mapboxgl.Popup({ offset: 20});
-  	marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
-    let text=`${airportsData[i].airportCode}<br>${airportsData[i].name}`
-    popup.setHTML(text);
-    marker.setPopup(popup);
-
-    marker.addTo(map);
-    popup.addTo(map);
-
-    currentMarkers.push(marker)
-  }
-}*/
-
-
-//locate Airplane
-function airplaneCallback()
-{
-  let url ="https://eng1003.monash/api/v1/planes/";
-  let data =
-  {
-    u: "ylii0235",
-    key: DARKSKY_KEY,
-    callback: "updateAirplanesLocalStorage"
-  };
-  webServiceRequest(url,data);
-}
-let airplanes=getAirplanesDataLocalStorage().airplanes;
-function search()
-{
-  countryRef=document.getElementById("country")
-  cityRef=document.getElementById("city")
-}
-let currentMarkers1=[];
-function locateAirplane()
-{
-  for(let i=0;i<airplanes.length;i++)
+  let airportsData=getSelectedAirplanesDataLocalStorage();
+  let selectedAirplanes=getAirplanesDataLocalStorage().airplanes;
+  for(let i=0;i<selectedAirplanes.length;i++)
   {
     for(let k=0;k<airportsData.length;k++)
     {
-      if(airplanes[i].location==airportsData[k].airportCode)
+      if(selectedAirplanes[i].location==airportsData[k].airportCode)
       {
         let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
         let popup = new mapboxgl.Popup({ offset: 20});
       	marker.setLngLat([airportsData[k].longitude,airportsData[k].latitude]);
-        let text=`ID:${airplanes[i].id}<br>`
-        text+=`Registration:${airplanes[i].registration}<br>`
-        text+=`Fly Range:${airplanes[i].range}<br>`
-        text+=`AvgSpeed:${airplanes[i].avgSpeed}<br>`
-        text+=`Type:${airplanes[i].type}<br>`
-        text+=`Status:${airplanes[i].status}<br>`
-        text+=`Airline:${airplanes[i].airline}<br>`
+        let text=`ID:${selectedAirplanes[i].id}<br>`
+        text+=`Registration:${selectedAirplanes[i].registration}<br>`
+        text+=`Fly Range:${selectedAirplanes[i].range}<br>`
+        text+=`AvgSpeed:${selectedAirplanes[i].avgSpeed}<br>`
+        text+=`Type:${selectedAirplanes[i].type}<br>`
+        text+=`Status:${selectedAirplanes[i].status}<br>`
+        text+=`Airline:${selectedAirplanes[i].airline}<br>`
         popup.setHTML(text);
         marker.setPopup(popup);
 
         marker.addTo(map);
         popup.addTo(map);
-        currentMarkers1.push(marker)
+        currentMarkers.push(marker)
       }
     }
   }
 }
+
 //Show Range of Airplane
 map.on('click', function(e) {
   let coordinates=e.lngLat
@@ -154,12 +132,12 @@ function showRange(coordinates)
 }
 function showAirpotsInTheRange()
 {
-  if (currentMarkers1.length>0)
+  if (currentMarkers.length>0)
   {
-    for (let i = 0; i < currentMarkers1.length; i++)
+    for (let i = 0; i < currentMarkers.length; i++)
       {
-        currentMarkers1[i].remove();
-        console.log(currentMarkers1)
+        currentMarkers[i].remove();
+        console.log(currentMarkers)
       }
   }
   // IDEA: if (distance<=range){show on the map}
@@ -205,5 +183,3 @@ function calculateTimeNeeded(speed)
   //distancs/speed
 }
 window.addEventListener("load",function(){positionCallback()})
-window.addEventListener("load",function(){airplaneCallback()})
-window.addEventListener("load",function(){locateAirplane()})

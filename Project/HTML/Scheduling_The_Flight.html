@@ -52,15 +52,15 @@
               <label class="mdl-textfield__label" for="time"></label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="country">
+              <input class="mdl-textfield__input" type="text" id="country" onchange="positionCallback()">
               <label class="mdl-textfield__label" for="country">Country</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="city">
+              <input class="mdl-textfield__input" type="text" id="city" onchange="positionCallback()">
               <label class="mdl-textfield__label" for="city">City</label>
             </div>
             <br>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="search" onclick="....locateAirport()">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="search" onclick="airplaneCallback()">
               Search
             </button>
 

@@ -22,22 +22,18 @@ class Plane
 {
 	constructor(id,reg,loc,range,speed,type,status,airline)
 	{
-		this._id = id;
-		this._reg = reg;
-		this._loc = loc;
-		this._range = range;
-		this._speed = speed;
-		this._type = type;
-		this._status = status;
-		this._airline = airline;
+		id = this._id;
+		reg = this._reg;
+		location = this._loc;
+		range = this._range;
+		speed = this._speed;
+		type = this._type;
+		status = this._status;
+		airline = this._airline;
 	}
 	get id()
 	{
 		return this._id;
-	}
-	get reg()
-	{
-		return this._reg;
 	}
 	get loc()
 	{
@@ -63,6 +59,7 @@ class Plane
 	{
 		return this._airline;
 	}
+
 	set id(newId)
 	{
 		this._id = newId;
@@ -116,7 +113,7 @@ class PlaneList
 }
 
 let SkyPlanes = new PlaneList();
-function definePlanesInClass()
+/*function definePlanesInClass()
 {
 	let planeStringLocal = localStorage.getItem("planeKey");
 	let planeData = JSON.parse(planeStringLocal);4
@@ -135,18 +132,18 @@ function definePlanesInClass()
 		);
 
 		SkyPlanes.addPlane(plane);
+		console.log(SkyPlanes.planeList)
 	}
-	console.log(SkyPlanes.planeList)
 }
-definePlanesInClass()
+*/
 
 
 
 
-/* function addPlanes()
+function addPlanes()
 {
 	let planeStringLocal = localStorage.getItem("planeKey");
-	let planeData = JSON.parse(planeStringLocal);
+	let planeData = JSON.parse(planeStringLocal);4
 	console.log(planeData.airplanes[0].id);
 	for (let i=0; i<planeData.airplanes.length; i++)
 	{
@@ -157,7 +154,7 @@ definePlanesInClass()
 	console.log(SkyPlanes.planeList[4].avgSpeed);
 }
 addPlanes()
-*/
+
 
 //Table
 function docTable()
@@ -188,11 +185,11 @@ function docTable()
 		<tr>
 			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].airline}</th>
 			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].id}</th>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].reg}</td>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].registration}</td>
 			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].type}</td>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].loc}</td>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].location}</td>
 			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].range}</th>
-			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].speed}</th>
+			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].avgSpeed}</th>
 			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].status.toUpperCase()}</td>
 		</tr>
 		`;
@@ -207,7 +204,31 @@ function docTable()
 
 docTable();
 
-	//need to make my own table
+//need to make my own search Function
+function search()
+{
+let input = document.getElementById("search");
+let filter = input.value.toUpperCase();
+let table = document.getElementById("fleetTable");
+let tr = table.getElementsByTagName("tr");
+for (i = 0; i < tr.length; i++)
+{
+	let td = tr[i].getElementsByTagName("td")[0] ;
+	if (td)
+	{
+		let txtValue = td.textContent || td.innerText;
+		if (txtValue.toUpperCase().indexOf(filter) > -1)
+		{
+			tr[i].style.display = "";
+		}
+		else
+		{
+			tr[i].style.display = "none";
+		}
+	}
+}
+}
+//need to make my own table
 function removeTable()
 {
 	let fleetTableRef = document.getElementById("fleetTable");
@@ -384,39 +405,6 @@ document.getElementById("tableRange").addEventListener('click',sortTableByRange(
 document.getElementById("tableSpeed").addEventListener('click',sortTableByAvgSpeed());
 document.getElementById("tableStatus").addEventListener('click',sortTableByStatus());
 
-function sortBySelect()
-{
-		let sortRef = document.getElementById("sortSelect");
-		let sortSelectValue = sortRef.value;
-			if (sortSelectValue =="airline")
-			{
-				sortTableByAirline();
-			}
-			else if (sortSelectValue == "id")
-			{
-				sortTableById();
-			}
-			else if (sortSelectValue == "registration")
-			{
-				sortTableByRegistration();
-			}
-			else if (sortSelectValue == "type")
-			{
-				sortTableByType();
-			}
-			else if (sortSelectValue == "location")
-			{
-				sortTableByLocation();
-			}
-			else if (sortSelectValue == "avgSpeed")
-			{
-				sortTableByAvgSpeed();
-			}
-			else if (sortSelectValue =="status")
-			{
-				sortTableByStatus();
-			}
-}
-
-document.getElementById("sortSelect").addEventListener('change',sortBySelect());
 sortTableById();
+//excute the function when page load
+window.addEventListener("load",function(){//function})
