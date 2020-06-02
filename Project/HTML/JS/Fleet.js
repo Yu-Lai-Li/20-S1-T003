@@ -37,7 +37,7 @@ class Plane
 	get speed(){return this._speed;}
 	get type(){return this._type;}
 	get status(){return this._status;}
-	get airline(){return this._airlin
+	get airline(){return this._airlin;}
 
 	set id(newId){this._id = newId;}
 	set loc(newLoc){this._loc = newLoc;}
@@ -46,6 +46,18 @@ class Plane
 	set type(newType){this.type = newType;}
 	set status(newStatus){this._status = newStatus;}
 	set airline(newAirline){this._airline = newAirline;}
+
+	fromData(Data)
+	{
+		this._id=data._id;
+		this._reg=data._reg;
+		this._loc=data._loc;
+		this._range=data._range;
+		this._speed=data._speed;
+		this._type=data._type;
+		this._status=data._status;
+		this._airline=data._airline;
+	}
 }
 
 class PlaneList
