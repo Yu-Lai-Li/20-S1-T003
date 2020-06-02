@@ -23,10 +23,12 @@ function currentLocationCallback(position)
   map.panTo([lng,lat]);
 }
 //locate Nearby Airport
+let countryRef=document.getElementById("country")
+let cityRef=document.getElementById("city")
+let timeRef=document.getElementById("time")
+let dataRef=di=document.getElementById("date")
 function positionCallback()
 {
-  let countryRef=document.getElementById("country")
-  let cityRef=document.getElementById("city")
   let url ="https://eng1003.monash/api/v1/airports/";
   let data =
   {
@@ -92,10 +94,12 @@ function locateAirplane(data)
 
 //Show Range of Airplane
 map.on('click', function(e) {
+  let airportsData=getAirportsDataLocalStorage();
   let coordinates=e.lngLat
   for (let i=0;i<airportsData.length;i++)
   {
-    if(Math.round(coordinates.lng)==Math.round(airportsData[i].longitude) && Math.round(coordinates.lat)==Math.round(airportsData[i].latitude))
+
+    if(coordinates.lng.toFixed(2)==airportsData[i].longitude.toFixed(2) && coordinates.lat.toFixed(2)==airportsData[i].latitude.toFixed(2))
     {
       showRange(coordinates)
       showAirpotsInTheRange();
@@ -149,17 +153,17 @@ function showAvailableAirplane()
   let output=""
   output +=
   `
-  <table class="mdl-data-table mdl-js-data-table" id = "availableTable">
+  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp"  id = "availableTable">
     <thead>
       <tr>
-        <th class="mdl-data-table__cell--non-numeric" id ="tableAir" onclick="sortTableByAirline()">Airline</th>
-        <th class="mdl-data-table__cell" id="tableID" onclick="sortTableById()">ID</th>
-        <th class="mdl-data-table__cell--non-numeric" id="tableReg" onclick="sortTableByRegistration()">Registration</th>
-        <th class="mdl-data-table__cell--non-numeric" id="tableType" onclick="sortTableByType()" >Type</th>
-        <th class="mdl-data-table__cell--non-numeric" id="tableLoc" onclick="sortTableByLocation()">Location</th>
-        <th class="mdl-data-table__cell" id="tableRange" onclick= "sortTableByRange()">Range</th>
-        <th class="mdl-data-table__cell" id="tableSpeed" onclick="sortTableByAvgSpeed()">Average Speed</th>
-        <th class="mdl-data-table__cell--non-numeric" id="tableStatus" onclick="sortTableByStatus">Status</th>
+        <th class="mdl-data-table__cell--non-numeric" id ="tableAir" >Airline</th>
+        <th class="mdl-data-table__cell" id="tableID" >ID</th>
+        <th class="mdl-data-table__cell--non-numeric" id="tableReg" >Registration</th>
+        <th class="mdl-data-table__cell--non-numeric" id="tableType"  >Type</th>
+        <th class="mdl-data-table__cell--non-numeric" id="tableLoc" >Location</th>
+        <th class="mdl-data-table__cell" id="tableRange" >Range</th>
+        <th class="mdl-data-table__cell" id="tableSpeed" >Average Speed</th>
+        <th class="mdl-data-table__cell--non-numeric" id="tableStatus" >Status</th>
       </tr>
     </thead>
     <tbody>
@@ -182,4 +186,3 @@ function calculateTimeNeeded(speed)
 {
   //distancs/speed
 }
-window.addEventListener("load",function(){positionCallback()})
