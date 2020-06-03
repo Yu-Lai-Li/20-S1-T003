@@ -122,7 +122,7 @@ map.on('click', function(e)
          if (airplaneData.airplanes[k].location==location)
          {
            airplaneInAirport.unshift(airplaneData.airplanes[k])
-           airplaneInAirportTep.push(airplaneData.airplanes[k])
+           airplaneInAirportTep.unshift(airplaneData.airplanes[k])
            available(airplaneInAirportTep)
          }
          else
