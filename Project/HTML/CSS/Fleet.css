@@ -22,3 +22,7 @@ body{
 .mdl-data-table .th-sortTableById::before  {
   cursor: pointer;
 }
+
+h2 {
+  text-align: center;
+}

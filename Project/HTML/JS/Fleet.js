@@ -6,9 +6,8 @@ document.body.appendChild(script);
 //Save to local storage
 function processPlaneData(object)
 {
-	const	PLANE_DATA_KEY = "planeKey"
 	let planeString = JSON.stringify(object);
-	localStorage.setItem("planeKey",planeString);
+	localStorage.setItem(AIRPLANES_DATA_KEY,planeString);
 }
 //Retrieve from local storage
 /*	WASNT WORKING
@@ -31,13 +30,14 @@ class Plane
 			this._status=status;
 	 		this._airline=airline;
 	}
-	get id(){	return this._id;}
+	get id(){return this._id;}
+	get reg(){return this._reg;}
 	get loc(){return this._loc;}
 	get range(){return this._range;}
 	get speed(){return this._speed;}
 	get type(){return this._type;}
 	get status(){return this._status;}
-	get airline(){return this._airlin;}
+	get airline(){return this._airline;}
 
 	set id(newId){this._id = newId;}
 	set loc(newLoc){this._loc = newLoc;}
@@ -77,7 +77,7 @@ class PlaneList
 }
 
 let SkyPlanes = new PlaneList();
-/*function definePlanesInClass()
+function definePlanesInClass()
 {
 	let planeStringLocal = localStorage.getItem("planeKey");
 	let planeData = JSON.parse(planeStringLocal);4
@@ -99,25 +99,10 @@ let SkyPlanes = new PlaneList();
 		console.log(SkyPlanes.planeList)
 	}
 }
-*/
+
+definePlanesInClass()
 
 
-
-
-function addPlanes()
-{
-	let planeStringLocal = localStorage.getItem("planeKey");
-	let planeData = JSON.parse(planeStringLocal);4
-	console.log(planeData.airplanes[0].id);
-	for (let i=0; i<planeData.airplanes.length; i++)
-	{
-		SkyPlanes.addPlane(planeData.airplanes[i]);
-	}
-	console.log(SkyPlanes.planeList);
-	console.log(SkyPlanes.planeList[0].type);
-	console.log(SkyPlanes.planeList[4].avgSpeed);
-}
-addPlanes()
 
 
 //Table
@@ -149,11 +134,11 @@ function docTable()
 		<tr>
 			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].airline}</th>
 			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].id}</th>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].registration}</td>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].reg}</td>
 			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].type}</td>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].location}</td>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].loc}</td>
 			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].range}</th>
-			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].avgSpeed}</th>
+			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].speed}</th>
 			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].status.toUpperCase()}</td>
 		</tr>
 		`;
@@ -215,11 +200,11 @@ function sortArrayById(a,b)
 
 function sortArrayByRegistration(a,b)
 {
-	if(a.registration < b.registration)
+	if(a.reg < b.reg)
 	{
 		return -1;
 	}
-	if (a.registration > b.registration)
+	if (a.reg > b.reg)
 	{
 		return 1;
 	}
@@ -228,11 +213,11 @@ function sortArrayByRegistration(a,b)
 
 function sortArrayByLocation(a,b)
 {
-	if(a.location < b.location)
+	if(a.loc < b.loc)
 	{
 		return -1;
 	}
-	if (a.location > b.location)
+	if (a.loc > b.loc)
 	{
 		return 1;
 	}
@@ -254,11 +239,11 @@ function sortArrayByRange(a,b)
 
 function sortArrayByAvgSpeed(a,b)
 {
-	if(a.avgSpeed < b.avgSpeed)
+	if(a.speed < b.speed)
 	{
 		return -1;
 	}
-	if (a.avgSpeed > b.avgSpeed)
+	if (a.speed > b.speed)
 	{
 		return 1;
 	}
@@ -370,5 +355,44 @@ document.getElementById("tableSpeed").addEventListener('click',sortTableByAvgSpe
 document.getElementById("tableStatus").addEventListener('click',sortTableByStatus());
 
 sortTableById();
-//excute the function when page load
-//window.addEventListener("load",function(){//function})
+
+function sortSelect()
+{
+	let select = document.getElementById("sortSelect");
+	let value = select.value
+	console.log(value);
+
+	if (value==1)
+	{
+		sortTableByAirline();
+	}
+	else if (value==2)
+	{
+		sortTableById();
+	}
+	else if (value==3)
+	{
+		sortTableByRegistration();
+	}
+	else if (value==4)
+	{
+		sortTableByType();
+	}
+	else if (value==5)
+	{
+		sortTableByLocation();
+	}
+	else if (value==6)
+	{
+		sortTableByRegistration();
+	}
+	else if (value==7)
+	{
+		sortTableByAvgSpeed();
+	}
+	else if (value==8)
+	{
+		sortTableByStatus();
+	}
+
+}
