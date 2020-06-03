@@ -7,6 +7,7 @@ const AIRPORT_DATA_KEY = "airportsData";
 const AIRPLANES_INDEX_KEY = "airplanesIndex";
 const AIRPLANES_DATA_KEY= "airplanesdata";
 const SELECTED_AIRPORT_DATA_KEY= "selectedAirport";
+const SELECTED_AIRPLANE_DATA_KEY= "selectedAirport";
 // webServiceRequest
 function webServiceRequest(url,data)
 {
@@ -94,6 +95,18 @@ function updateSelectedAirportsLocalStorage(airportsData)
     console.log("localStorage is not supported by current browser.");
   }
 }
+//update selectedAirport
+function updateSelectedAirplaneLocalStorage(airportsData)
+{
+  if (typeof(Storage) !== "undefined")
+  {
+    localStorage.setItem(`${SELECTED_AIRPLANE_DATA_KEY}`,JSON.stringify(airportsData));
+  }
+  else
+  {
+    console.log("localStorage is not supported by current browser.");
+  }
+}
 //get infomation from localStorage
 function getFlightDataLocalStorage()
 {
@@ -118,6 +131,11 @@ function getAirplanesDataLocalStorage()
 function getSelectedAirportDataLocalStorage()
 {
   let data = JSON.parse(localStorage.getItem(`${SELECTED_AIRPORT_DATA_KEY}`));
+  return data;
+}
+function getSelectedAirplaneLocalStorage()
+{
+  let data = JSON.parse(localStorage.getItem(`${SELECTED_AIRPLANE_DATA_KEY}`));
   return data;
 }
 //checkIfDataExistsLocalStorage
