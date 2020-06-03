@@ -39,7 +39,7 @@
       <main class="mdl-layout__content">
         <div class="page-content">
           <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">
+            <div class="mdl-cell mdl-cell--12-col">
               <div class="mdl-textfield mdl-js-textfield">
                 <br>
                 <h2>Schedule a Flight</h2>
@@ -47,14 +47,17 @@
                 <input class="mdl-textfield__input" type="date" id="date">
                 <label class="mdl-textfield__label" for="date"></label>
               </div>
+              <h6>Time</h6>
               <div class="mdl-textfield mdl-js-textfield">
                 <input class="mdl-textfield__input" type="time" id="time">
                 <label class="mdl-textfield__label" for="time"></label>
               </div>
+              <h6>Country</h6>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="country" onchange="positionCallback()">
                 <label class="mdl-textfield__label" for="country">Country</label>
               </div>
+              <h6>City</h6>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="city" onchange="positionCallback()">
                 <label class="mdl-textfield__label" for="city">City</label>
@@ -88,6 +91,7 @@
             <div class="mdl-cell mdl-cell--1-col"></div>
             <div class="mdl-cell mdl-cell--1-col"></div>
             <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--1-col"></div>
             <div class="mdl-cell mdl-cell--1-col">
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="back">
                 Back
@@ -96,11 +100,10 @@
             <div class="mdl-cell mdl-cell--1-col">
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="confirm">
                 ConfirmFlight
-              </button>
-            </div>
+              </button></div>
             <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
+          </div>
+          <div class="mdl-grid">
           </div>
         </div>
       </main>
