@@ -83,8 +83,10 @@ function airplaneCallback()
 //locate Airplanes and chosed aiprport
 let airplaneData=getAirplanesDataLocalStorage();
 let airplaneInAirport=[];
+
 map.on('click', function(e)
 {
+    let airplaneInAirport=[];
   let airportsData=getAirportsDataLocalStorage();
   let coordinates=e.lngLat
   for (let i=0;i<airportsData.length;i++)
@@ -121,12 +123,15 @@ map.on('click', function(e)
          if (airplaneData.airplanes[k].location==location)
          {
            airplaneInAirport.push(airplaneData.airplanes[k])
-           showAvailableAirplane();
+           let tableRef=document.getElementById("table")
+           let output="";
+           tableRef.innerHTML=output;
          }
          else
          {
-           airplaneInAirport.push("");
-           showAvailableAirplane();
+           let tableRef=document.getElementById("table")
+           let output="No Airplane is Available in this Airport";
+           tableRef.innerHTML=output;
          }
        }
     }
@@ -163,6 +168,7 @@ function showAvailableAirplane(airplaneInAirport)
     tableRef.innerHTML=output;
   }
 }
+
 function calculateDistance(location1,location2)
 {
 		 let R = 6371e3;

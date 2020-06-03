@@ -24,7 +24,7 @@
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">SkYsCheGular</span>
-          <div class="mdl-layout-spacer"></div>
+            <div class="mdl-layout-spacer"></div>
         </div>
       </header>
       <div class="mdl-layout__drawer">
@@ -35,80 +35,90 @@
           <a class="mdl-navigation__link" href="Fleet%20Info2.html">Flight Information</a>
         </nav>
       </div>
-    </div>
+
       <main class="mdl-layout__content">
         <div class="page-content">
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">
-              <div class="mdl-textfield mdl-js-textfield">
-                <br>
-                <h2>Schedule a Flight</h2>
-                <h6>Date</h6>
-                <input class="mdl-textfield__input" type="date" id="date">
-                <label class="mdl-textfield__label" for="date"></label>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <h3>Schedule a Flight</h3>
               </div>
-              <h6>Time</h6>
-              <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="time" id="time">
-                <label class="mdl-textfield__label" for="time"></label>
+            </div>
+
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="date" id="date">
+                  <label class="mdl-textfield__label" for="date"></label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="time" id="time">
+                  <label class="mdl-textfield__label" for="time"></label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="country" onchange="positionCallback()">
+                  <label class="mdl-textfield__label" for="country">Country</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="city" onchange="positionCallback()">
+                  <label class="mdl-textfield__label" for="city">City</label>
               </div>
-              <h6>Country</h6>
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="country" onchange="positionCallback()">
-                <label class="mdl-textfield__label" for="country">Country</label>
-              </div>
-              <h6>City</h6>
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="city" onchange="positionCallback()">
-                <label class="mdl-textfield__label" for="city">City</label>
-              </div>
-              <br>
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="search" onclick="locateAirport()">
                 Search
               </button>
-                  <div class="mdl-cell mdl-cell--4-col">
-                    <div id="table">
-                      <!-- IDEA: Table -->
-                    </div>
-                  <div>
             </div>
-          </div>
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--6-col">
-              <div id="map"></div>
+              <div class="mdl-cell mdl-cell--6-col">
+                  <table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric" id ="tableAir" >Airline</th>
+         				        <th class="mdl-data-table__cell" id="tableID" >ID</th>
+         				        <th class="mdl-data-table__cell--non-numeric" id="tableReg" >Registration</th>
+         				        <th class="mdl-data-table__cell--non-numeric" id="tableType" >Type</th>
+         				        <th class="mdl-data-table__cell--non-numeric" id="tableLoc" >Location</th>
+         				        <th class="mdl-data-table__cell" id="tableRange" >Range</th>
+         				        <th class="mdl-data-table__cell" id="tableSpeed" >Average Speed</th>
+                 				<th class="mdl-data-table__cell--non-numeric" id="tableStatus" >Status</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <div id="table"></div>
+              </div>
             </div>
-          </div>
-          <div class="mdl-grid">
 
-            <img src="" alt="">
-            <img src="" alt="">
-          </div>
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
-            <div class="mdl-cell mdl-cell--1-col">
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="back">
-                Back
-              </button>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div id="map"></div>
+              </div>
             </div>
-            <div class="mdl-cell mdl-cell--1-col">
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="confirm">
-                ConfirmFlight
-              </button></div>
-            <div class="mdl-cell mdl-cell--1-col"></div>
-          </div>
-          <div class="mdl-grid">
-          </div>
+
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--1-col"></div>
+              <div class="mdl-cell mdl-cell--1-col">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="back">
+                  Back
+                </button>
+              </div>
+              <div class="mdl-cell mdl-cell--1-col">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="confirm">
+                  ConfirmFlight
+                </button>
+              </div>
+            </div>
+
         </div>
       </main>
     </div>
     <script type="text/javascript" src="JS/Shared.js"></script>
     <script type="text/javascript" src="JS/STF_map.js"></script>
-  </body>
-  </html>
+</body>
+</html>
