@@ -20,7 +20,6 @@ function positionCallback(position)
 {
   let lat = position.coords.latitude;
   let lng = position.coords.longitude;
-  map.panTo([lng,lat]);
   let url ="https://eng1003.monash/api/v1/darksky/";
   let data =
   {
@@ -35,13 +34,13 @@ function positionCallback(position)
 
 function weatherCallback(weather)
 {
-  //show weather
+  console.log(weather.currently.icon)
 }
 
 
 
 
-class RouteList
+/*class RouteList
 {
   constructor(origin="",destination="",arrivalTime=0,departureTime=0,totalDistance=0)
   {
@@ -113,3 +112,4 @@ class WeatherInformation
   set typeOfWeather(newType){this._typeOfWeather=newType;}
 
 }
+*/
