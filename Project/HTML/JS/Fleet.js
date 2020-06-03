@@ -371,4 +371,4 @@ document.getElementById("tableStatus").addEventListener('click',sortTableByStatu
 
 sortTableById();
 //excute the function when page load
-window.addEventListener("load",function(){//function})
+//window.addEventListener("load",function(){//function})
