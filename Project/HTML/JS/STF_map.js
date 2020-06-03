@@ -220,12 +220,9 @@ function confirm()
   {
     for(let i=0;i<optionRef.length;i++)
     {
-      console.log(optionRef.length);
-      console.log(optionRef[i]);
       if(optionRef[i].checked)
       {
         let selectedAirplane=airplaneInAirport[i];
-        console.log(airplaneInAirport);
         console.log(selectedAirplane);
         updateSelectedAirplaneLocalStorage(selectedAirplane);
         alert("Hello")

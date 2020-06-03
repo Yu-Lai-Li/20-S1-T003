@@ -7,7 +7,7 @@ const AIRPORT_DATA_KEY = "airportsData";
 const AIRPLANES_INDEX_KEY = "airplanesIndex";
 const AIRPLANES_DATA_KEY= "airplanesdata";
 const SELECTED_AIRPORT_DATA_KEY= "selectedAirport";
-const SELECTED_AIRPLANE_DATA_KEY= "selectedAirport";
+const SELECTED_AIRPLANE_DATA_KEY= "selectedAirplane";
 // webServiceRequest
 function webServiceRequest(url,data)
 {
