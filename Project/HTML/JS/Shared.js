@@ -133,3 +133,5 @@ function checkIfDataExistsLocalStorage()
     return false;
   }
 }
+let reviewRef = document.getElementById("viewFilghtInformation")
+reviewRef.addEventListener("click",function(){window.location="Flight_Information_Summary.html"})
