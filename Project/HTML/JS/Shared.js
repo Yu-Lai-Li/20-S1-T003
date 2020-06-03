@@ -115,7 +115,7 @@ function getAirplanesDataLocalStorage()
   let data = JSON.parse(localStorage.getItem(`${AIRPLANES_DATA_KEY}`));
   return data;
 }
-function getSelectedAirplanesDataLocalStorage()
+function getSelectedAirportDataLocalStorage()
 {
   let data = JSON.parse(localStorage.getItem(`${SELECTED_AIRPORT_DATA_KEY}`));
   return data;

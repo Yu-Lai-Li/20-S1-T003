@@ -40,9 +40,9 @@ function positionCallback()
   webServiceRequest(url,data);
 }
 let currentMarkers=[];
-let airportsData=getSelectedAirplanesDataLocalStorage();
 function locateAirport()
 {
+  let airportsData=getSelectedAirportDataLocalStorage();
   if (currentMarkers.length>0)
   {
     for (let i = 0; i < currentMarkers.length; i++)
@@ -50,7 +50,6 @@ function locateAirport()
       currentMarkers[i].remove();
     }
   }
-
   for(let i=0;i<airportsData.length;i++)
   {
     let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
@@ -58,7 +57,7 @@ function locateAirport()
     marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
     let text=`${airportsData[i].airportCode}<br>`
     text+=`Airport Name:${airportsData[i].name}<br>`
-    text+=`City::${airportsData[i].city}<br>`
+    text+=`City:${airportsData[i].city}<br>`
     text+=`Country:${airportsData[i].country}<br>`
     popup.setHTML(text);
     marker.setPopup(popup);
@@ -83,7 +82,6 @@ function airplaneCallback()
 //locate Airplanes and chosed aiprport
 let airplaneData=getAirplanesDataLocalStorage();
 let airplaneInAirport=[];
-
 map.on('click', function(e)
 {
     let airplaneInAirport=[];
@@ -132,6 +130,9 @@ map.on('click', function(e)
            let tableRef=document.getElementById("table")
            let output="No Airplane is Available in this Airport";
            tableRef.innerHTML=output;
+           //let distance = function distance
+            //if (distance<=airplaneData.aipalenes[k].range)
+            //{markrers+theairplen information and airport}
          }
        }
     }
