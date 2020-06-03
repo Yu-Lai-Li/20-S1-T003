@@ -15,7 +15,6 @@ else
 {
   alert("Geolocation Is Not Available");
 }
-
 function currentLocationCallback(position)
 {
   let lat = position.coords.latitude;
@@ -40,7 +39,36 @@ function positionCallback()
   };
   webServiceRequest(url,data);
 }
-//locate Nearby Airplane
+let currentMarkers=[];
+let airportsData=getSelectedAirplanesDataLocalStorage();
+function locateAirport()
+{
+  if (currentMarkers.length>0)
+  {
+    for (let i = 0; i < currentMarkers.length; i++)
+    {
+      currentMarkers[i].remove();
+    }
+  }
+
+  for(let i=0;i<airportsData.length;i++)
+  {
+    let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+    let popup = new mapboxgl.Popup({ offset: 20});
+    marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
+    let text=`${airportsData[i].airportCode}<br>`
+    text+=`Airport Name:${airportsData[i].name}<br>`
+    text+=`City::${airportsData[i].city}<br>`
+    text+=`Country:${airportsData[i].country}<br>`
+    popup.setHTML(text);
+    marker.setPopup(popup);
+
+    marker.addTo(map);
+    popup.addTo(map);
+    currentMarkers.push(marker)
+  }
+}
+// Airplanes
 function airplaneCallback()
 {
   let url ="https://eng1003.monash/api/v1/planes/";
@@ -48,13 +76,113 @@ function airplaneCallback()
   {
     u: "ylii0235",
     key: DARKSKY_KEY,
-    callback: "locateAirplane"
+    callback: "updateAirplanesLocalStorage"
   };
   webServiceRequest(url,data);
 }
+//locate Airplanes and chosed aiprport
+let airplaneData=getAirplanesDataLocalStorage();
+let airplaneInAirport=[];
+map.on('click', function(e)
+{
+  let airportsData=getAirportsDataLocalStorage();
+  let coordinates=e.lngLat
+  for (let i=0;i<airportsData.length;i++)
+  {
+    if(coordinates.lng.toFixed(2)==airportsData[i].longitude.toFixed(2) && coordinates.lat.toFixed(2)==airportsData[i].latitude.toFixed(2))
+    {
+      //clear markers
+      if (currentMarkers.length>0)
+      {
+        for (let i = 0; i < currentMarkers.length; i++)
+        {
+          currentMarkers[i].remove();
+        }
+      }
+      //add marker for selected airport
+      let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+      let popup = new mapboxgl.Popup({ offset: 20});
+      marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
+      let text=`${airportsData[i].airportCode}<br>`
+      text+=`Airport Name:${airportsData[i].name}<br>`
+      text+=`City::${airportsData[i].city}<br>`
+      text+=`Country:${airportsData[i].country}<br>`
+      popup.setHTML(text);
+      marker.setPopup(popup);
 
-let currentMarkers=[];
-function locateAirplane(data)
+      marker.addTo(map);
+      popup.addTo(map);
+      currentMarkers.push(marker)
+      //add airplane in airport
+       let location=airportsData[i].airportCode;
+       for(let k=0;k<airplaneData.airplanes.length;k++)
+       {
+         console.log(airplaneData.airplanes[k].location==location)
+         if (airplaneData.airplanes[k].location==location)
+         {
+           airplaneInAirport.push(airplaneData.airplanes[k])
+           showAvailableAirplane();
+         }
+         else
+         {
+           airplaneInAirport.push("");
+           showAvailableAirplane();
+         }
+       }
+    }
+  }
+});
+//
+function showAirpotsInTheRange()
+{
+  if (currentMarkers.length>0)
+  {
+    for (let i = 0; i < currentMarkers.length; i++)
+      {
+        currentMarkers[i].remove();
+        console.log(currentMarkers)
+      }
+  }
+  // IDEA: if (distance<=range){show on the map}
+}
+//show Available Airplane in Table
+function showAvailableAirplane(airplaneInAirport)
+{
+  //when airplane is  Available
+  if (airplaneInAirport != "")
+  {
+    let tableRef=document.getElementById("table")
+    let output="";
+    tableRef.innerHTML=output;
+  }
+  //When airplane is NOT Available
+  else
+  {
+    let tableRef=document.getElementById("table")
+    let output="No Airplane is Available in this Airport";
+    tableRef.innerHTML=output;
+  }
+}
+function calculateDistance(location1,location2)
+{
+		 let R = 6371e3;
+		 let φ1 = this.location1[1] * Math.PI/180;
+		 let φ2 = this.location2[1] * Math.PI/180;
+		 let Δφ = (this.location2[1]-this.location1[1]) * Math.PI/180;
+		 let Δλ = (this.location2[0]-this.location1[0]) * Math.PI/180;
+		 let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) *Math.sin(Δλ/2) * Math.sin(Δλ/2);
+		 let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		 let distance =(R * c)/1000;
+     return distance;
+}
+function calculateTimeNeeded(speed)
+{
+  //distancs/speed
+}
+window.addEventListener("load",function(){airplaneCallback()})
+
+
+/*function showAirplane()
 {
   if (currentMarkers.length>0)
   {
@@ -71,6 +199,7 @@ function locateAirplane(data)
     {
       if(selectedAirplanes[i].location==airportsData[k].airportCode)
       {
+        //show airports on the map
         let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
         let popup = new mapboxgl.Popup({ offset: 20});
       	marker.setLngLat([airportsData[k].longitude,airportsData[k].latitude]);
@@ -90,22 +219,8 @@ function locateAirplane(data)
       }
     }
   }
-}
-//Show Range of Airplane
-map.on('click', function(e) {
-  let airportsData=getAirportsDataLocalStorage();
-  let coordinates=e.lngLat
-  for (let i=0;i<airportsData.length;i++)
-  {
-
-    if(coordinates.lng.toFixed(2)==airportsData[i].longitude.toFixed(2) && coordinates.lat.toFixed(2)==airportsData[i].latitude.toFixed(2))
-    {
-      showAirpotsInTheRange();
-      showAvailableAirplane()
-    }
-  }
-});
-function showRange(coordinates)
+}*/
+/*function showRange(coordinates)
 {
   map.addSource('circle', {
     "type": "geojson",
@@ -131,57 +246,4 @@ function showRange(coordinates)
       'circle-stroke-color': '#333',
     },
   });
-}
-function showAirpotsInTheRange()
-{
-  if (currentMarkers.length>0)
-  {
-    for (let i = 0; i < currentMarkers.length; i++)
-      {
-        currentMarkers[i].remove();
-        console.log(currentMarkers)
-      }
-  }
-  // IDEA: if (distance<=range){show on the map}
-}
-//show Available Airplane in Table
-function showAvailableAirplane()
-{
-  let tableRef=document.getElementById("table")
-  let output=""
-  output +=
-  `
-  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp"  id = "availableTable">
-    <thead>
-      <tr>
-        <th class="mdl-data-table__cell--non-numeric" id ="tableAir" >Airline</th>
-        <th class="mdl-data-table__cell" id="tableID" >ID</th>
-        <th class="mdl-data-table__cell--non-numeric" id="tableReg" >Registration</th>
-        <th class="mdl-data-table__cell--non-numeric" id="tableType"  >Type</th>
-        <th class="mdl-data-table__cell--non-numeric" id="tableLoc" >Location</th>
-        <th class="mdl-data-table__cell" id="tableRange" >Range</th>
-        <th class="mdl-data-table__cell" id="tableSpeed" >Average Speed</th>
-        <th class="mdl-data-table__cell--non-numeric" id="tableStatus" >Status</th>
-      </tr>
-    </thead>
-    <tbody>
-  `;
-  tableRef.innerHTML=output;
-}
-function calculateDistance(location1,location2)
-{
-		 let R = 6371e3;
-		 let φ1 = this.location1[1] * Math.PI/180;
-		 let φ2 = this.location2[1] * Math.PI/180;
-		 let Δφ = (this.location2[1]-this.location1[1]) * Math.PI/180;
-		 let Δλ = (this.location2[0]-this.location1[0]) * Math.PI/180;
-		 let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) *Math.sin(Δλ/2) * Math.sin(Δλ/2);
-		 let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		 let distance =(R * c)/1000;
-     return distance;
-}
-function calculateTimeNeeded(speed)
-{
-  //distancs/speed
-}
-window.addEventListener("load",function(){putAirplaneInAirport()})
+}*/

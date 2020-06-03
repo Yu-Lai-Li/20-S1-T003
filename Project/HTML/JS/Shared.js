@@ -5,7 +5,7 @@ const ROUTE_DATA_KEY = "routeData";
 const AIRPORT_INDEX_KEY = "airportsIndex";
 const AIRPORT_DATA_KEY = "airportsData";
 const AIRPLANES_INDEX_KEY = "airplanesIndex";
-const AIRPLANS_DATA_KEY= "airplanesdata";
+const AIRPLANES_DATA_KEY= "airplanesdata";
 const SELECTED_AIRPORT_DATA_KEY= "selectedAirport";
 // webServiceRequest
 function webServiceRequest(url,data)
@@ -51,7 +51,7 @@ function updateAirplanesLocalStorage(airplanesData)
 {
   if (typeof(Storage) !== "undefined")
   {
-    localStorage.setItem(`${AIRPLANS_DATA_KEY}`,JSON.stringify(airplanesData));
+    localStorage.setItem(`${AIRPLANES_DATA_KEY}`,JSON.stringify(airplanesData));
   }
   else
   {
@@ -112,7 +112,7 @@ function getAirportsDataLocalStorage()
 }
 function getAirplanesDataLocalStorage()
 {
-  let data = JSON.parse(localStorage.getItem(`${AIRPLANS_DATA_KEY}`));
+  let data = JSON.parse(localStorage.getItem(`${AIRPLANES_DATA_KEY}`));
   return data;
 }
 function getSelectedAirplanesDataLocalStorage()
@@ -133,5 +133,6 @@ function checkIfDataExistsLocalStorage()
     return false;
   }
 }
+window.addEventListener("load",function(){updateAirplanesLocalStorage()})
 let reviewRef = document.getElementById("viewFilghtInformation")
 reviewRef.addEventListener("click",function(){window.location="Flight_Information_Summary.html"})
