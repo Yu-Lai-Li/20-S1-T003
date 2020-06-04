@@ -39,14 +39,28 @@
 
       <main class="mdl-layout__content">
         <div class="page-content">
+          <h2>Scheduling The Route</h2>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--6-col">
-            <h2>Scheduling The Flight</h2>
             <br>
-
               <div id="selectedFlightInformation">
                 <!-- IDEA: Fight -->
               </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="country" >
+                <label class="mdl-textfield__label" for="country">Country</label>
+              </div>
+
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="city" >
+                <label class="mdl-textfield__label" for="city">City</label>
+              </div>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="search" onclick="positionCallback()">
+              Search
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="showPath" onclick="showPath()">
+              showPathway
+            </button>
             </div>
           </div>
           <div class="mdl-grid">

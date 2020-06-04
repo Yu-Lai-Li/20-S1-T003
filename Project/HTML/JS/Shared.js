@@ -6,7 +6,7 @@ const AIRPORT_INDEX_KEY = "airportsIndex";
 const AIRPORT_DATA_KEY = "airportsData";
 const AIRPLANES_INDEX_KEY = "airplanesIndex";
 const AIRPLANES_DATA_KEY= "airplanesdata";
-const SELECTED_AIRPORT_DATA_KEY= "selectedAirport";
+const SELECTED_AIRPORT_DATA_KEY= "selectedAirportData";
 const SELECTED_AIRPLANE_DATA_KEY= "selectedAirplane";
 const TIME_KEY="time"
 const DATE_KEY="date"
@@ -98,11 +98,11 @@ function updateFlightLocalStorage(flightData)
   }
 }
 //update Route
-function updateRouteLocalStorage(routeData)
+function updateRouteListLocalStorage(routeListData)
 {
   if (typeof(Storage) !== "undefined")
   {
-    localStorage.setItem(`${ROUTE_DATA_KEY}`,JSON.stringify(routeData));
+    localStorage.setItem(`${ROUTE_DATA_KEY}`,JSON.stringify(routeListData));
   }
   else
   {
@@ -139,7 +139,7 @@ function getFlightDataLocalStorage()
   let data = JSON.parse(localStorage.getItem(`${FLIGHT_DATA_KEY}`));
   return data;
 }
-function getRouteDataLocalStorage()
+function getRouteListDataLocalStorage()
 {
   let data = JSON.parse(localStorage.getItem(`${ROUTE_DATA_KEY}`));
   return data;
