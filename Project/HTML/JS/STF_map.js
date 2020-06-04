@@ -25,7 +25,9 @@ function currentLocationCallback(position)
 let countryRef=document.getElementById("country")
 let cityRef=document.getElementById("city")
 let timeRef=document.getElementById("time")
-let dataRef=di=document.getElementById("date")
+let dataRef=document.getElementById("date")
+updateTime(timeRef.value)
+updateDate(dataRef.value)
 function positionCallback()
 {
   let url ="https://eng1003.monash/api/v1/airports/";
@@ -81,16 +83,20 @@ function airplaneCallback()
 }
 //locate Airplanes and chosed aiprport
 let airplaneData=getAirplanesDataLocalStorage();
+let airplaneInAirportTep=[];
 let airplaneInAirport=[];
+let coordinatesOfSelectedAirport=[];
 map.on('click', function(e)
 {
-    let airplaneInAirport=[];
+  let airplaneInAirportTep=[];
   let airportsData=getAirportsDataLocalStorage();
   let coordinates=e.lngLat
   for (let i=0;i<airportsData.length;i++)
   {
-    if(coordinates.lng.toFixed(2)==airportsData[i].longitude.toFixed(2) && coordinates.lat.toFixed(2)==airportsData[i].latitude.toFixed(2))
+    if(coordinates.lng.toFixed(1)==airportsData[i].longitude.toFixed(1) && coordinates.lat.toFixed(1)==airportsData[i].latitude.toFixed(1))
     {
+      //getCurrentSelectedAirport
+      coordinatesOfSelectedAirport.unshift(airportsData[i])
       //clear markers
       if (currentMarkers.length>0)
       {
@@ -117,78 +123,143 @@ map.on('click', function(e)
        let location=airportsData[i].airportCode;
        for(let k=0;k<airplaneData.airplanes.length;k++)
        {
-         console.log(airplaneData.airplanes[k].location==location)
-         if (airplaneData.airplanes[k].location==location)
+         if (airplaneData.airplanes[k].location==location && airplaneData.airplanes[k].status=="available")
          {
-           airplaneInAirport.push(airplaneData.airplanes[k])
-           let tableRef=document.getElementById("table")
-           let output="";
-           tableRef.innerHTML=output;
+           airplaneInAirport.unshift(airplaneData.airplanes[k])
+           airplaneInAirportTep.unshift(airplaneData.airplanes[k])
+           available(airplaneInAirportTep)
          }
          else
          {
-           let tableRef=document.getElementById("table")
-           let output="No Airplane is Available in this Airport";
-           tableRef.innerHTML=output;
-           //let distance = function distance
-            //if (distance<=airplaneData.aipalenes[k].range)
-            //{markrers+theairplen information and airport}
+           unavailable(airplaneInAirportTep)
          }
        }
     }
   }
 });
-//
-function showAirpotsInTheRange()
+//Available Airplane
+function available(data)
 {
-  if (currentMarkers.length>0)
-  {
-    for (let i = 0; i < currentMarkers.length; i++)
-      {
-        currentMarkers[i].remove();
-        console.log(currentMarkers)
-      }
-  }
-  // IDEA: if (distance<=range){show on the map}
-}
-//show Available Airplane in Table
-function showAvailableAirplane(airplaneInAirport)
-{
-  //when airplane is  Available
-  if (airplaneInAirport != "")
+  if(data !="")
   {
     let tableRef=document.getElementById("table")
     let output="";
-    tableRef.innerHTML=output;
+    for(let i=0;i<data.length;i++)
+    {
+       output+=
+      `
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option${i}">
+        <input type="radio" id="option${i}" class="mdl-radio__button" name="options">
+        <span class="mdl-radio__label">${data[i].airline}----${data[i].id}------${data[i].registration}-----${data[i].type} --  ${data[i].location} ----- ${data[i].range} Km---- ${data[i].avgSpeed}Km/h ------ ${data[i].status}</span>
+      </label>
+      <br>
+      `;
+      tableRef.innerHTML=output;
+    }
   }
-  //When airplane is NOT Available
-  else
+}
+//Unavailable Airline
+function unavailable(data)
+{
+  if(data =="")
   {
     let tableRef=document.getElementById("table")
-    let output="No Airplane is Available in this Airport";
+    let output="No Airplane is Available in this Airport<br>Nearest Airplanes That could reach This Airport Has Been Shown On The Map";
     tableRef.innerHTML=output;
+    showAirpotsInTheRange();
   }
 }
 
-function calculateDistance(location1,location2)
+function showAirpotsInTheRange()
+{
+  let airportsData=getSelectedAirportDataLocalStorage();
+  let airplanesData=getAirplanesDataLocalStorage();
+  for(let j=0;j<airplanesData.airplanes.length;j++)
+  {
+    for(let i=0;i<airportsData.length;i++)
+    {
+      let range=airplanesData.airplanes[j].range
+      let distance=calculateDistance(coordinatesOfSelectedAirport[0].latitude,coordinatesOfSelectedAirport[0].longitude,airportsData[i].latitude,airportsData[i].longitude);
+      if(range>=distance && airplanesData.airplanes[j].location==airportsData[i].airportCode)
+      {
+        let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+        let popup = new mapboxgl.Popup({ offset: 20});
+        marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
+        let text=`ID:${airplanesData.airplanes[j].id}<br>`
+        text+=`Registration:${airplanesData.airplanes[j].registration}<br>`
+        text+=`Fly Range:${airplanesData.airplanes[j].range}<br>`
+        text+=`AvgSpeed:${airplanesData.airplanes[j].avgSpeed}<br>`
+        text+=`Type:${airplanesData.airplanes[j].type}<br>`
+        text+=`Status:${airplanesData.airplanes[j].status}<br>`
+        text+=`Airline:${airplanesData.airplanes[j].airline}<br>`
+        text+=`Location :${airplanesData.airplanes[j].location}<br>`
+        popup.setHTML(text);
+        marker.setPopup(popup);
+
+        marker.addTo(map);
+        popup.addTo(map);
+        currentMarkers.push(marker)
+      }
+    }
+  }
+
+  // IDEA: if (distance<=range){show on the map}
+}
+
+function calculateDistance(latitude1,longitude1,latitude2,longitude2)
 {
 		 let R = 6371e3;
-		 let φ1 = this.location1[1] * Math.PI/180;
-		 let φ2 = this.location2[1] * Math.PI/180;
-		 let Δφ = (this.location2[1]-this.location1[1]) * Math.PI/180;
-		 let Δλ = (this.location2[0]-this.location1[0]) * Math.PI/180;
+		 let φ1 = latitude1 * Math.PI/180;
+		 let φ2 = latitude2 * Math.PI/180;
+		 let Δφ = (latitude2-latitude1) * Math.PI/180;
+		 let Δλ = (longitude2-longitude1) * Math.PI/180;
 		 let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) *Math.sin(Δλ/2) * Math.sin(Δλ/2);
 		 let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		 let distance =(R * c)/1000;
      return distance;
 }
-function calculateTimeNeeded(speed)
-{
-  //distancs/speed
-}
 window.addEventListener("load",function(){airplaneCallback()})
-
-
+//Create aiport data
+function airportCallback()
+{
+  let url ="https://eng1003.monash/api/v1/airports/";
+  let data =
+  {
+    u: "ylii0235",
+    key: DARKSKY_KEY,
+    country:countryRef.value,
+    city:cityRef.value,
+    callback: "updateAirportsLocalStorage"
+  };
+  webServiceRequest(url,data);
+}
+window.addEventListener("load",function(){airportCallback()})
+//confirm button
+let confirmRef=document.getElementById("confirm")
+confirmRef.addEventListener("click",function(){confirm()})
+function confirm()
+{
+  let optionRef=document.getElementsByName("options")
+  if(optionRef.length!=0)
+  {
+    for(let i=0;i<optionRef.length;i++)
+    {
+      if(optionRef[i].checked)
+      {
+        let selectedAirplane=airplaneInAirport[i];
+        updateSelectedAirplaneLocalStorage(selectedAirplane);
+        window.location="STF_Route.html"
+      }
+    }
+  }
+  else
+  {
+    alert("No airplane has been chosen")
+  }
+}
+//back button
+let backRef=document.getElementById("back")
+backRef.addEventListener("click",function(){window.location="Homepage.html"})
 /*function showAirplane()
 {
   if (currentMarkers.length>0)
