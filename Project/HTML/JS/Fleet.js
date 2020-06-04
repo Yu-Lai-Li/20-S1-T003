@@ -15,9 +15,9 @@ function processPlaneData(object)
 }
 //Retrieve from local storage
 /*	WASNT WORKING
-	let planeStringLocal = localStorage.getItem("planeKey");
-	let planeData = JSON.parse(planeStringLocal);4
-	console.log(planeData.airplanes[0].id);
+let planeStringLocal = localStorage.getItem("planeKey");
+let planeData = JSON.parse(planeStringLocal);4
+console.log(planeData.airplanes[0].id);
 */
 
 //PLanes Class not sure what to do here
@@ -25,14 +25,14 @@ class Plane
 {
 	constructor(id,reg,loc,range,speed,type,status,airline)
 	{
-			this._id=id;
-			this._reg=reg;
-	 		this._loc=loc;
-			this._range=range;
-			this._speed=speed;
-	 		this._type=type;
-			this._status=status;
-	 		this._airline=airline;
+		this._id=id;
+		this._reg=reg;
+		this._loc=loc;
+		this._range=range;
+		this._speed=speed;
+		this._type=type;
+		this._status=status;
+		this._airline=airline;
 	}
 	get id(){return this._id;}
 	get reg(){return this._reg;}
@@ -117,38 +117,38 @@ function docTable()
 	output +=
 	`
 	<table class="mdl-data-table mdl-js-data-table" id = "fleetTable">
-		<thead>
-			<tr>
-				<th class="mdl-data-table__cell--non-numeric" id ="tableAir" onclick="sortTableByAirline()">Airline</th>
-				<th class="mdl-data-table__cell" id="tableID" onclick="sortTableById()">ID</th>
-				<th class="mdl-data-table__cell--non-numeric" id="tableReg" onclick="sortTableByRegistration()">Registration</th>
-				<th class="mdl-data-table__cell--non-numeric" id="tableType" onclick="sortTableByType()" >Type</th>
-				<th class="mdl-data-table__cell--non-numeric" id="tableLoc" onclick="sortTableByLocation()">Location</th>
-				<th class="mdl-data-table__cell" id="tableRange" onclick= "sortTableByRange()">Range</th>
-				<th class="mdl-data-table__cell" id="tableSpeed" onclick="sortTableByAvgSpeed()">Average Speed</th>
-				<th class="mdl-data-table__cell--non-numeric" id="tableStatus" onclick="sortTableByStatus">Status</th>
-			</tr>
-		</thead>
-		<tbody>
+	<thead>
+	<tr>
+	<th class="mdl-data-table__cell--non-numeric" id ="tableAir" onclick="sortTableByAirline()">Airline</th>
+	<th class="mdl-data-table__cell" id="tableID" onclick="sortTableById()">ID</th>
+	<th class="mdl-data-table__cell--non-numeric" id="tableReg" onclick="sortTableByRegistration()">Registration</th>
+	<th class="mdl-data-table__cell--non-numeric" id="tableType" onclick="sortTableByType()" >Type</th>
+	<th class="mdl-data-table__cell--non-numeric" id="tableLoc" onclick="sortTableByLocation()">Location</th>
+	<th class="mdl-data-table__cell" id="tableRange" onclick= "sortTableByRange()">Range</th>
+	<th class="mdl-data-table__cell" id="tableSpeed" onclick="sortTableByAvgSpeed()">Average Speed</th>
+	<th class="mdl-data-table__cell--non-numeric" id="tableStatus" onclick="sortTableByStatus">Status</th>
+	</tr>
+	</thead>
+	<tbody>
 	`;
 	for (let i=0;i<SkyPlanes.planeList.length;i++)
 	{
 		output +=
 		`
 		<tr>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].airline}</th>
-			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].id}</th>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].reg}</td>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].type}</td>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].loc}</td>
-			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].range}</th>
-			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].speed}</th>
-			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].status.toUpperCase()}</td>
+		<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].airline}</th>
+		<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].id}</th>
+		<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].reg}</td>
+		<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].type}</td>
+		<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].loc}</td>
+		<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].range}</th>
+		<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].speed}</th>
+		<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].status.toUpperCase()}</td>
 		</tr>
 		`;
 	}
 	output+= `
-		</tbody>
+	</tbody>
 	</table>`;
 	console.log(output);
 	tableRef.innerHTML = output;
@@ -157,30 +157,6 @@ function docTable()
 
 docTable();
 
-//need to make my own search Function
-function search()
-{
-let input = document.getElementById("search");
-let filter = input.value.toUpperCase();
-let table = document.getElementById("fleetTable");
-let tr = table.getElementsByTagName("tr");
-for (i = 0; i < tr.length; i++)
-{
-	let td = tr[i].getElementsByTagName("td")[0] ;
-	if (td)
-	{
-		let txtValue = td.textContent || td.innerText;
-		if (txtValue.toUpperCase().indexOf(filter) > -1)
-		{
-			tr[i].style.display = "";
-		}
-		else
-		{
-			tr[i].style.display = "none";
-		}
-	}
-}
-}
 //need to make my own table
 function removeTable()
 {
@@ -363,9 +339,7 @@ sortTableById();
 function sortSelect()
 {
 	let select = document.getElementById("sortSelect");
-	let value = select.value
-	console.log(value);
-
+	let value = select.value;
 	if (value==1)
 	{
 		sortTableByAirline();
