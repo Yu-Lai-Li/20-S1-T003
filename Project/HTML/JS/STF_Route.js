@@ -197,10 +197,25 @@ function calculateTimeNeeded(distance)
   let time =distance/airplaneData.airplanes.avgSpeed
   return time
 }
-
+function displayDistanceAndTime()
+{
+  let distances=[];
+  distance.push(origin);
+  console.log(distance);
+  let pathData=getRouteListDataLocalStorage();
+  for(let i=0;i<pathData._routeList.length;i++)
+  {
+      distance.push(pathData._routeList[i]._coordinates)
+  }
+  for(let k=0;k<distance.length;k++)
+  {
+    calculateDistance(distance[k]);
+  }
+}
 //showPathway
 function showPath()
 {
+  displayDistanceAndTime()
   console.log(origin);
   let pathData=getRouteListDataLocalStorage();
   let object = {
@@ -230,3 +245,5 @@ function showPath()
     paint: { "line-color": "#888", "line-width": 6 }
   });
 }
+let backRef=document.getElementById("back")
+backRef.addEventListener("click",function(){window.location="Scheduling_The_Flight.html"})
