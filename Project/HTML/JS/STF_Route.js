@@ -247,13 +247,17 @@ function showPath()
   });
     displayDistanceAndTime()
 }
+//clearPath
+function clearPath()
+{
+  map.removeLayer("routes");
+  map.removeSource("routes");
+}
+//navigation
 let backRef=document.getElementById("back")
 backRef.addEventListener("click",function(){window.location="Scheduling_The_Flight.html"})
 let confirmRef=document.getElementById("confirm")
 confirmRef.addEventListener("click",function()
 {
-  confirm("Are Sure Make This Route?")
-  {
     window.location="Review_The_Flight.html";
-  }
 })
