@@ -6,8 +6,12 @@ document.body.appendChild(script);
 //Save to local storage
 function processPlaneData(object)
 {
-	let planeString = JSON.stringify(object);
-	localStorage.setItem(AIRPLANES_DATA_KEY,planeString);
+	if (localStorage.getItem(AIRPLANES_DATA_KEY) == null || localStorage.getItem(AIRPLANES_DATA_KEY) == "" || localStorage.getItem(AIRPLANES_DATA_KEY) == undefined)
+	{
+		let planeString = JSON.stringify(object);
+		localStorage.setItem(AIRPLANES_DATA_KEY,planeString);
+	}
+
 }
 //Retrieve from local storage
 /*	WASNT WORKING
@@ -384,7 +388,7 @@ function sortSelect()
 	}
 	else if (value==6)
 	{
-		sortTableByRegistration();
+		sortTableByRange();
 	}
 	else if (value==7)
 	{
