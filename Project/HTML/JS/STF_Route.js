@@ -28,13 +28,77 @@ function displayInformation()
   let time=getTime();
   let date=getDate();
   let output="";
-      output+=`For<br> ${information.registration}`;
-      output+="";
-      output+="";
-      output+="";
+      output+=`<br><h3>For<br> ${information.registration} in ${information.location}`;
+      output+=`<br>at ${time}|| ${date}</h3>`;
     divRef.innerHTML=output;
 
 }
+window.addEventListener("load",function(){displayInformation()})
+let airplaneData=getAirplanesDataLocalStorage();
+//Route
+class Route
+{
+  constructor(airportN,code,lat,lng)
+  {
+    this._airportName=airportN;
+    this._code=code;
+    this._latitude=lat;
+    this._longitude=lng;
+  }
+    get airportName(){return this._airportName}
+    get code(){return this._code}
+    get latitude(){return this._latitude}
+    get longitude(){return this._longitude}
+
+    set airportName(newName){ this._airportName}
+    set code(newCode){this._code}
+    set latitude(newLat){this._latitude}
+    set longitude(newLng){this._longitude}
+
+    fromData(data)
+    {
+      this._airportName=data._airportName;
+      this._code=data._code;
+      this._latitude=data._latitude;
+      this._longitude=data._longitude;
+    }
+}
+//RouteList
+class RouteList
+{
+  constructor()
+  {
+    this._routeList=[];
+  }
+    get routeList(){return this._routeList}
+  addRoute(route)
+  {
+    this._routeList.push(route)
+  }
+  formData(data)
+  {
+    this._routeList = [];
+    for(let i = 0; i < data.routeList.length; i++)
+    {
+      let route = new Route();
+      route.fromData(data._routeList[i]);
+      this._lockers.push(route);
+    }
+  }
+}
+//
+map.on('click', function(e)
+{
+  let airportsData=getAirportsDataLocalStorage();
+  let coordinates=e.lngLat
+  for (let i=0;i<airportsData.length;i++)
+  {
+    if(coordinates.lng.toFixed(1)==airportsData[i].longitude.toFixed(1) && coordinates.lat.toFixed(1)==airportsData[i].latitude.toFixed(1))
+    {
+
+    }
+  }
+});
 function calculateDistance(latitude1,longitude1,latitude2,longitude2)
 {
 		 let R = 6371e3;

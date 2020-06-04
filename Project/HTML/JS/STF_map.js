@@ -22,12 +22,19 @@ function currentLocationCallback(position)
   map.panTo([lng,lat]);
 }
 //locate Nearby Airport
-let countryRef=document.getElementById("country")
-let cityRef=document.getElementById("city")
-let timeRef=document.getElementById("time")
-let dataRef=document.getElementById("date")
-updateTime(timeRef.value)
-updateDate(dataRef.value)
+let countryRef=document.getElementById("country");
+let cityRef=document.getElementById("city");
+function time()
+{
+  let timeRef=document.getElementById("time").value;
+  updateTime(timeRef);
+}
+function date()
+{
+  let dataRef=document.getElementById("date").value;
+  updateDate(dataRef)
+}
+
 function positionCallback()
 {
   let url ="https://eng1003.monash/api/v1/airports/";
