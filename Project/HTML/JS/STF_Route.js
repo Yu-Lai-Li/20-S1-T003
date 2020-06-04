@@ -38,3 +38,31 @@ function calculateTimeNeeded(speed)
 {
   //distancs/speed
 }
+function showPath()
+{
+  let object = {
+    type: "geojson",
+    data:
+    {
+      type: "Feature",
+      properties: {},
+      geometry:
+      {
+        type: "LineString",
+        coordinates: []
+      }
+    }
+  };
+  for(let i = 0; i < locations.length; i++)
+  {
+    object.data.geometry.coordinates.push(locations[i].coordinates);
+  }
+
+  map.addLayer({
+    id: "routes",
+    type: "line",
+    source: object,
+    layout: { "line-join": "round", "line-cap": "round" },
+    paint: { "line-color": "#888", "line-width": 6 }
+  });
+}

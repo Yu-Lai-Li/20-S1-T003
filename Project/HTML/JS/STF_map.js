@@ -25,7 +25,9 @@ function currentLocationCallback(position)
 let countryRef=document.getElementById("country")
 let cityRef=document.getElementById("city")
 let timeRef=document.getElementById("time")
-let dataRef=di=document.getElementById("date")
+let dataRef=document.getElementById("date")
+updateTime(timeRef.value)
+updateDate(dataRef.value)
 function positionCallback()
 {
   let url ="https://eng1003.monash/api/v1/airports/";
