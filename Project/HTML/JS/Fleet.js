@@ -384,7 +384,7 @@ function sortSelect()
 	}
 	else if (value==6)
 	{
-		sortTableByRegistration();
+		sortTableByRange();
 	}
 	else if (value==7)
 	{
