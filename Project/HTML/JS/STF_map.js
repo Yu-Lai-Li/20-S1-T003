@@ -216,10 +216,6 @@ function calculateDistance(latitude1,longitude1,latitude2,longitude2)
 		 let distance =(R * c)/1000;
      return distance;
 }
-function calculateTimeNeeded(speed)
-{
-  //distancs/speed
-}
 window.addEventListener("load",function(){airplaneCallback()})
 //Create aiport data
 function airportCallback()
@@ -250,7 +246,7 @@ function confirm()
       {
         let selectedAirplane=airplaneInAirport[i];
         updateSelectedAirplaneLocalStorage(selectedAirplane);
-        alert("Hello")
+        window.location="STF_Route.html"
       }
     }
   }
