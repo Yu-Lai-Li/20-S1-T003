@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -108,6 +109,147 @@
                 <table class="table2">
                   <tr>
                     <th>
+                      <span>Departure</span>
+                    </th>
+                    <td>
+                      <div id="arrivalSummaryWeather"></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <span>Destination</span>
+                    </th>
+                    <td>
+                      <div id="departureSummaryWeather"></div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div align="right">
+                <br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="home" onclick="returnHome()">Home</button>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+ <script src="map.js"></script>
+ </html>
+=======
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Flight Information Summary</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/FIS.styles.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style type="text/css">
+    #map{
+      height: calc(35vh - 56px);
+      width: 100%;
+      border: 1px solid black;
+    }
+    </style>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">SkYsCheGuler</span>
+          <div class="mdl-layout-spacer"></div>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">SkYsCheGular</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="Homepage.html">Home</a>
+          <a class="mdl-navigation__link" href="Scheduling_The_Flight.html">Schedule a Flight</a>
+          <a class="mdl-navigation__link" href="Fleet_Information.html">Flight Information</a>
+          <a class="mdl-navigation__link" href="Review_The_Flight.html">Review The Flight</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="page-content">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--10-col"><h3><strong>Flight Summary</strong></h3></div>
+            <div class="mdl-cell mdl-cell--1-col"></div>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--10-col">
+              <div id="map"></div>
+              <div class="div1">
+                <p style="text-align:center;"><span id="originSummary"><img src="Images/arrow.png" alt="arrowIcon" width="15" height="15"></span><span id="wayPointSummary"></span><span id="destinationSummary"></span></p>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col"></div>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--10-col">
+              <p style="font-size:16px;"><strong>Departure Date: </strong><span id="departureDateSummary">???</span></p>
+              <p style="font-size:16px;"><strong>Estimated Arrival: </strong><span id="estimatedArrivalSummary">???</span></p>
+              <p style="font-size:16px;"><strong>Distance: </strong><span id="distanceSummary">???</span></p>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col"></div>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--5-col">
+              <div class="div2">
+                <div align="center">
+                  <img src="Images/airplaneIcon.png" alt="airplane icon" width="50" height="50">
+                  <br>
+                </div>
+                <table class="table1">
+                  <tr>
+                    <th width="150px">Registration</th>
+                    <td><span id="registration"></span></td>
+                  </tr>
+                  <tr>
+                    <th width="150px">Location</th>
+                    <td><span id="location"></span> </td>
+                  </tr>
+                  <tr>
+                    <th width="150px">Range</th>
+                    <td><span id="range"></span> </td>
+                  </tr>
+                  <tr>
+                    <th width="150px">Average Speed</th>
+                    <td><span id="averageSpeed"></span> </td>
+                  </tr>
+                  <tr>
+                    <th width="150px">Type</td>
+                    <td><span id="type"></span> </td>
+                  </tr>
+                  <tr>
+                    <th width="150px">Status</th>
+                    <td><span id="status"></span> </td>
+                  </tr>
+                  <tr>
+                    <th width="150px">Airline</th>
+                    <td><span id="airline"></span></td>
+                  </tr>
+                </table>
+              </div>
+              <br>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deleteFlight" onclick="deleteFlight()">Delete</button>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col"></div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <div class="div3">
+                <p style="font-size:16px; text-align:center;"><strong>Weather</strong></p>
+                <table class="table2">
+                  <tr>
+                    <th>
                       <span id="departureSummaryWeather">Departure</span>
                       <img scr="">
                     </th>
@@ -137,5 +279,7 @@
       </main>
     </div>
   </body>
- <script src="map.js"></script>
+    <script type="text/javascript" src="JS/Shared.js"></script>
+ <script src="JS/Fleet_Information_Summary.js"></script>
  </html>
+>>>>>>> master

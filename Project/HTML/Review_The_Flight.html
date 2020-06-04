@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <title>App Name</title>
+  <link rel="stylesheet" href="css/weather-icons.min.css">
+  <title>SkYsCheGulare</title>
 </head>
 <body>
 
@@ -32,16 +33,17 @@
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="Homepage.html">Home</a>
         <a class="mdl-navigation__link" href="Scheduling_The_Flight.html">Schedule a Flight</a>
-        <a class="mdl-navigation__link" href="Fleet%20Info2.html">Flight Information</a>
+        <a class="mdl-navigation__link" href="Fleet_Information.html">Flight Information</a>
+        <a class="mdl-navigation__link" href="Review_The_Flight.html">Review The Flight</a>
       </nav>
     </div>
   </div>
-  
+
     <main class="mdl-layout__content">
       <div class="page-content">
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--4-col">
-            <h1>Schedule a Flight</h1>
+            <br>
             <h3>Review your flight</h3>
           </div>
         </div>
@@ -49,6 +51,13 @@
           <div class="mdl-cell mdl-cell--4-col">
             <div id="map"></div>
           </div>
+        </div>
+        <div class="mdl-grid">
+          <h6>Wether in Origin:</h6>
+          <i class="wi wi-night-sleet display-2"></i>
+          <br>
+          <h6>Wether in Destination:</h6>
+          <i class="wi wi-night-sleet"></i>
         </div>
         <div>
           <table id="flightInformation">
@@ -59,11 +68,6 @@
             </tr>
           </table>
           <!-- IDEA: Table -->
-        </div>
-        <div class="mdl-grid">
-
-          <img src="" alt="">
-          <img src="" alt="">
         </div>
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--1-col"></div>
@@ -90,6 +94,7 @@
       </div>
     </main>
   </div>
+    <script type="text/javascript" src="JS/Shared.js"></script>
   <script type="text/javascript" src="JS/RTF_map.js"></script>
 </body>
 </html>

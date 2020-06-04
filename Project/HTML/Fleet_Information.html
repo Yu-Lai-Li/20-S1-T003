@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="CSS/Fleet.css"></link>
+    <title>SkYsCheGular</title>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">SkYsCheGuler</span>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="Homepage.html">Home</a>
+          <a class="mdl-navigation__link" href="Scheduling_The_Flight.html">Schedule a Flight</a>
+          <a class="mdl-navigation__link" href="Fleet_Information.html">Flight Information</a>
+          <a class="mdl-navigation__link" href="Review_The_Flight.html">Review The Flight</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <h2 class="serif">Fleet Information</h2>
+        <div class="page-content">
+          <div class = "mdl-grid">
+            <div class = "mdl-cell mdl-cell--1-col"></div>
+            <div class = "mdl-cell mdl-cell--2-col">
+              Sort By:
+              <select  id="sortSelect" onchange="sortSelect()">
+                <option value = ""  disabled>Sort By</option>
+                <option value = "1">Airline</option>
+                <option value = "2" selected>ID</option>
+                <option value = "3">Registration</option>
+                <option value = "4">Type</option>
+                <option value = "5">Location</option>
+                <option value = "6">Range</option>
+                <option value = "7">Average Speed</option>
+                <option value = "8">Status</option>
+              </select>
+            </div>
+            <div class = "mdl-cell mdl-cell--1-col"></div>
+            <div class = "mdl-cell mdl-cell--1-col"></div>
+            <div class = "mdl-cell mdl-cell--2-col"></div>
+            <div class = "mdl-cell mdl-cell--1-col"></div>
+            <div class = "mdl-cell mdl-cell--2-col"></div>
+            <div class = "mdl-cell mdl-cell--1-col"></div>
+            <div class = "mdl-cell mdl-cell--1-col"></div>
+          </div>
+          <div class = "mdl-grid">
+            <div class = "mdl-cell mdl-cell--1-col"></div>
+            <div class = "mdl-cell mdl-cell--10-col" id = "fleetSection">
+
+            </div>
+            <div class = "mdl-cell mdl-cell--1-col"></div>
+            </div>
+        </div>
+      </main>
+    </div>
+    <script type="text/javascript" src="JS/Fleet.js"></script>
+    <script type="text/javascript" src="JS/Shared.js"></script>
+  </body>
+</html>

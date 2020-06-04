@@ -1,324 +1,402 @@
-let processPlaneData =
-	{
-		"airplanes": [
-		   {
-			  "id":1,
-			  "registration":"VH-TAI",
-			  "location":"ADL",
-			  "range":17395,
-			  "avgSpeed":512,
-			  "type":"777-200LR",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":2,
-			  "registration":"VH-MGS",
-			  "location":"MEL",
-			  "range":17395,
-			  "avgSpeed":512,
-			  "type":"777-200LR",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":3,
-			  "registration":"VH-LSO",
-			  "location":"SYD",
-			  "range":14200,
-			  "avgSpeed":488,
-			  "type":"787-800",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":4,
-			  "registration":"VH-VHI",
-			  "location":"AVV",
-			  "range":15000,
-			  "avgSpeed":570,
-			  "type":"747-800",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":5,
-			  "registration":"VH-LAT",
-			  "location":"CNS",
-			  "range":14200,
-			  "avgSpeed":488,
-			  "type":"787-800",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":6,
-			  "registration":"VH-IOA",
-			  "location":"PER",
-			  "range":5600,
-			  "avgSpeed":474,
-			  "type":"F900C",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":7,
-			  "registration":"VH-KCS",
-			  "location":"OOL",
-			  "range":15400,
-			  "avgSpeed":566,
-			  "type":"A380-800",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":8,
-			  "registration":"VH-GRI",
-			  "location":"ASP",
-			  "range":11750,
-			  "avgSpeed":470,
-			  "type":"A330-300",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":9,
-			  "registration":"VH-UJL",
-			  "location":"MEL",
-			  "range":11750,
-			  "avgSpeed":470,
-			  "type":"A330-300",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":10,
-			  "registration":"VH-ZAX",
-			  "location":"SYD",
-			  "range":5600,
-			  "avgSpeed":474,
-			  "type":"F900C",
-			  "status":"available",
-			  "airline":"Qantas"
-		   },
-		   {
-			  "id":11,
-			  "registration":"N49265",
-			  "location":"LAX",
-			  "range":5600,
-			  "avgSpeed":474,
-			  "type":"F900C",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":12,
-			  "registration":"N723Y",
-			  "location":"LAX",
-			  "range":5600,
-			  "avgSpeed":474,
-			  "type":"F900C",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":13,
-			  "registration":"N649TL",
-			  "location":"JFK",
-			  "range":5600,
-			  "avgSpeed":474,
-			  "type":"F900C",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":14,
-			  "registration":"N781SG",
-			  "location":"JFK",
-			  "range":5600,
-			  "avgSpeed":474,
-			  "type":"F900C",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":15,
-			  "registration":"N969XD",
-			  "location":"DCA",
-			  "range":5600,
-			  "avgSpeed":474,
-			  "type":"F900C",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":16,
-			  "registration":"N743YS",
-			  "location":"TPL",
-			  "range":11750,
-			  "avgSpeed":470,
-			  "type":"A330-300",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":17,
-			  "registration":"N692SR",
-			  "location":"GYY",
-			  "range":14200,
-			  "avgSpeed":488,
-			  "type":"787-800",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":18,
-			  "registration":"N921BW",
-			  "location":"SEA",
-			  "range":17395,
-			  "avgSpeed":512,
-			  "type":"777-200LR",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":19,
-			  "registration":"N843QY",
-			  "location":"TUS",
-			  "range":15000,
-			  "avgSpeed":570,
-			  "type":"747-800",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":20,
-			  "registration":"N387SK",
-			  "location":"IAD",
-			  "range":14200,
-			  "avgSpeed":488,
-			  "type":"787-800",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":21,
-			  "registration":"N59PK",
-			  "location":"ALB",
-			  "range":14200,
-			  "avgSpeed":488,
-			  "type":"787-800",
-			  "status":"available",
-			  "airline":"American Airlines"
-		   },
-		   {
-			  "id":22,
-			  "registration":"9M-HBP",
-			  "location":"KUL",
-			  "range":15000,
-			  "avgSpeed":570,
-			  "type":"747-800",
-			  "status":"available",
-			  "airline":"Malaysian Airlines"
-		   },
-		   {
-			  "id":23,
-			  "registration":"9M-HJY",
-			  "location":"PEN",
-			  "range":17395,
-			  "avgSpeed":512,
-			  "type":"777-200LR",
-			  "status":"available",
-			  "airline":"Malaysian Airlines"
-		   },
-		   {
-			  "id":24,
-			  "registration":"9M-JDE",
-			  "location":"LGK",
-			  "range":17395,
-			  "avgSpeed":512,
-			  "type":"777-200LR",
-			  "status":"available",
-			  "airline":"Malaysian Airlines"
-		   },
-		   {
-			  "id":25,
-			  "registration":"G-BUU",
-			  "location":"LHR",
-			  "range":5600,
-			  "avgSpeed":474,
-			  "type":"F900C",
-			  "status":"available",
-			  "airline":"British Airways"
-		   },
-		   {
-			  "id":26,
-			  "registration":"G-SGB",
-			  "location":"LGW",
-			  "range":15400,
-			  "avgSpeed":566,
-			  "type":"A380-800",
-			  "status":"available",
-			  "airline":"British Airways"
-		   },
-		   {
-			  "id":27,
-			  "registration":"G-EAG",
-			  "location":"NWI",
-			  "range":5600,
-			  "avgSpeed":474,
-			  "type":"F900C",
-			  "status":"available",
-			  "airline":"British Airways"
-		   },
-		   {
-			  "id":28,
-			  "registration":"G-HES",
-			  "location":"GVA",
-			  "range":17395,
-			  "avgSpeed":512,
-			  "type":"777-200LR",
-			  "status":"available",
-			  "airline":"British Airways"
-		   },
-		   {
-			  "id":29,
-			  "registration":"G-XWN",
-			  "location":"FRA",
-			  "range":15400,
-			  "avgSpeed":566,
-			  "type":"A380-800",
-			  "status":"available",
-			  "airline":"British Airways"
-		   }
-		]
-	};
+//Web service request
+let script = document.createElement('script');
+script.src = "https://eng1003.monash/api/v1/planes/?callback=processPlaneData";
+document.body.appendChild(script);
 
-//Search Function got it from w3schools
-	function search()
+//Save to local storage
+function processPlaneData(object)
 {
-	let input = document.getElementById("search");
-	let filter = input.value.toUpperCase();
-	let table = document.getElementById("myTable");
-	let tr = table.getElementsByTagName("tr");
-	for (i = 0; i < tr.length; i++)
+	if (localStorage.getItem(AIRPLANES_DATA_KEY) == null || localStorage.getItem(AIRPLANES_DATA_KEY) == "" || localStorage.getItem(AIRPLANES_DATA_KEY) == undefined)
 	{
-		let td = tr[i].getElementsByTagName("td")[0];
-		if (td)
+		let planeString = JSON.stringify(object);
+		localStorage.setItem(AIRPLANES_DATA_KEY,planeString);
+	}
+
+}
+//Retrieve from local storage
+/*	WASNT WORKING
+	let planeStringLocal = localStorage.getItem("planeKey");
+	let planeData = JSON.parse(planeStringLocal);4
+	console.log(planeData.airplanes[0].id);
+*/
+
+//PLanes Class not sure what to do here
+class Plane
+{
+	constructor(id,reg,loc,range,speed,type,status,airline)
+	{
+			this._id=id;
+			this._reg=reg;
+	 		this._loc=loc;
+			this._range=range;
+			this._speed=speed;
+	 		this._type=type;
+			this._status=status;
+	 		this._airline=airline;
+	}
+	get id(){return this._id;}
+	get reg(){return this._reg;}
+	get loc(){return this._loc;}
+	get range(){return this._range;}
+	get speed(){return this._speed;}
+	get type(){return this._type;}
+	get status(){return this._status;}
+	get airline(){return this._airline;}
+
+	set id(newId){this._id = newId;}
+	set loc(newLoc){this._loc = newLoc;}
+	set range(newRange){this._range = newRange;}
+	set speed(newSpeed){this._speed = newSpeed;}
+	set type(newType){this.type = newType;}
+	set status(newStatus){this._status = newStatus;}
+	set airline(newAirline){this._airline = newAirline;}
+
+	fromData(Data)
+	{
+		this._id=data._id;
+		this._reg=data._reg;
+		this._loc=data._loc;
+		this._range=data._range;
+		this._speed=data._speed;
+		this._type=data._type;
+		this._status=data._status;
+		this._airline=data._airline;
+	}
+}
+
+class PlaneList
+{
+	constructor()
+	{
+		this._planeList = [];
+	}
+
+	get planeList(){return this._planeList;}
+	get numberOfPlanes(){return this._planeList.length;}
+
+	addPlane(plane)
+	{
+		this._planeList.push(plane);
+	}
+}
+
+let SkyPlanes = new PlaneList();
+function definePlanesInClass()
+{
+	let planeStringLocal = localStorage.getItem("planeKey");
+	let planeData = JSON.parse(planeStringLocal);4
+	console.log(planeData.airplanes[0].id);
+	for (let i=0; i<planeData.airplanes.length; i++)
+	{
+		let plane = new Plane (
+			planeData.airplanes[i].id,
+			planeData.airplanes[i].registration,
+			planeData.airplanes[i].location,
+			planeData.airplanes[i].range,
+			planeData.airplanes[i].avgSpeed,
+			planeData.airplanes[i].type,
+			planeData.airplanes[i].status,
+			planeData.airplanes[i].airline
+		);
+
+		SkyPlanes.addPlane(plane);
+		console.log(SkyPlanes.planeList)
+	}
+}
+
+definePlanesInClass()
+
+
+
+
+//Table
+function docTable()
+{
+	let output = "";
+	let tableRef= document.getElementById("fleetSection");
+	output +=
+	`
+	<table class="mdl-data-table mdl-js-data-table" id = "fleetTable">
+		<thead>
+			<tr>
+				<th class="mdl-data-table__cell--non-numeric" id ="tableAir" onclick="sortTableByAirline()">Airline</th>
+				<th class="mdl-data-table__cell" id="tableID" onclick="sortTableById()">ID</th>
+				<th class="mdl-data-table__cell--non-numeric" id="tableReg" onclick="sortTableByRegistration()">Registration</th>
+				<th class="mdl-data-table__cell--non-numeric" id="tableType" onclick="sortTableByType()" >Type</th>
+				<th class="mdl-data-table__cell--non-numeric" id="tableLoc" onclick="sortTableByLocation()">Location</th>
+				<th class="mdl-data-table__cell" id="tableRange" onclick= "sortTableByRange()">Range</th>
+				<th class="mdl-data-table__cell" id="tableSpeed" onclick="sortTableByAvgSpeed()">Average Speed</th>
+				<th class="mdl-data-table__cell--non-numeric" id="tableStatus" onclick="sortTableByStatus">Status</th>
+			</tr>
+		</thead>
+		<tbody>
+	`;
+	for (let i=0;i<SkyPlanes.planeList.length;i++)
+	{
+		output +=
+		`
+		<tr>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].airline}</th>
+			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].id}</th>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].reg}</td>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].type}</td>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].loc}</td>
+			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].range}</th>
+			<td class="mdl-data-table__cell">${SkyPlanes.planeList[i].speed}</th>
+			<td class="mdl-data-table__cell--non-numeric">${SkyPlanes.planeList[i].status.toUpperCase()}</td>
+		</tr>
+		`;
+	}
+	output+= `
+		</tbody>
+	</table>`;
+	console.log(output);
+	tableRef.innerHTML = output;
+
+}
+
+docTable();
+
+//need to make my own search Function
+function search()
+{
+let input = document.getElementById("search");
+let filter = input.value.toUpperCase();
+let table = document.getElementById("fleetTable");
+let tr = table.getElementsByTagName("tr");
+for (i = 0; i < tr.length; i++)
+{
+	let td = tr[i].getElementsByTagName("td")[0] ;
+	if (td)
+	{
+		let txtValue = td.textContent || td.innerText;
+		if (txtValue.toUpperCase().indexOf(filter) > -1)
 		{
-			let txtValue = td.textContent || td.innerText;
-			if (txtValue.toUpperCase().indexOf(filter) > -1)
-			{
-				tr[i].style.display = "";
-			}
-			else
-			{
-				tr[i].style.display = "none";
-			}
+			tr[i].style.display = "";
+		}
+		else
+		{
+			tr[i].style.display = "none";
 		}
 	}
 }
-//For the show per page Function
-//We need something called Bootstrap Pagings
-console.log(processPlaneData.airplanes.length);
-//29 planes
+}
+//need to make my own table
+function removeTable()
+{
+	let fleetTableRef = document.getElementById("fleetTable");
+	fleetTableRef.parentNode.removeChild(fleetTableRef);
+}
+
+
+function sortArrayById(a,b)
+{
+	if(a.id < b.id)
+	{
+		return -1;
+	}
+	if (a.id > b.id)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByRegistration(a,b)
+{
+	if(a.reg < b.reg)
+	{
+		return -1;
+	}
+	if (a.reg > b.reg)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByLocation(a,b)
+{
+	if(a.loc < b.loc)
+	{
+		return -1;
+	}
+	if (a.loc > b.loc)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByRange(a,b)
+{
+	if(a.range < b.range)
+	{
+		return -1;
+	}
+	if (a.range > b.range)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByAvgSpeed(a,b)
+{
+	if(a.speed < b.speed)
+	{
+		return -1;
+	}
+	if (a.speed > b.speed)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByType(a,b)
+{
+	if(a.type < b.type)
+	{
+		return -1;
+	}
+	if (a.type > b.type)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByStatus(a,b)
+{
+	if(a.status < b.status)
+	{
+		return -1;
+	}
+	if (a.status > b.status)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortArrayByAirline(a,b)
+{
+	if(a.airline < b.airline)
+	{
+		return -1;
+	}
+	if (a.airline > b.airline)
+	{
+		return 1;
+	}
+	return 0
+}
+
+function sortTableById()
+{
+	SkyPlanes.planeList.sort(sortArrayById);
+	removeTable();
+	docTable();
+}
+
+function sortTableByRegistration()
+{
+	SkyPlanes.planeList.sort(sortArrayByRegistration);
+	removeTable();
+	docTable();
+}
+
+function sortTableByLocation()
+{
+	SkyPlanes.planeList.sort(sortArrayByLocation);
+	removeTable();
+	docTable();
+}
+
+function sortTableByRange()
+{
+	SkyPlanes.planeList.sort(sortArrayByRange);
+	removeTable();
+	docTable();
+}
+
+function sortTableByType()
+{
+	SkyPlanes.planeList.sort(sortArrayByType);
+	removeTable();
+	docTable();
+}
+
+function sortTableByAvgSpeed()
+{
+	SkyPlanes.planeList.sort(sortArrayByAvgSpeed);
+	removeTable();
+	docTable();
+}
+
+function sortTableByStatus()
+{
+	SkyPlanes.planeList.sort(sortArrayByStatus);
+	removeTable();
+	docTable();
+}
+
+function sortTableByAirline()
+{
+	SkyPlanes.planeList.sort(sortArrayByAirline);
+	removeTable();
+	docTable();
+}
+
+document.getElementById("tableAir").addEventListener('click', sortTableByAirline());
+document.getElementById("tableID").addEventListener('click',sortTableById());
+document.getElementById("tableReg").addEventListener('click',sortTableByRegistration());
+document.getElementById("tableType").addEventListener('click',sortTableByType());
+document.getElementById("tableLoc").addEventListener('click',sortTableByLocation());
+document.getElementById("tableRange").addEventListener('click',sortTableByRange());
+document.getElementById("tableSpeed").addEventListener('click',sortTableByAvgSpeed());
+document.getElementById("tableStatus").addEventListener('click',sortTableByStatus());
+
+sortTableById();
+
+function sortSelect()
+{
+	let select = document.getElementById("sortSelect");
+	let value = select.value
+	console.log(value);
+
+	if (value==1)
+	{
+		sortTableByAirline();
+	}
+	else if (value==2)
+	{
+		sortTableById();
+	}
+	else if (value==3)
+	{
+		sortTableByRegistration();
+	}
+	else if (value==4)
+	{
+		sortTableByType();
+	}
+	else if (value==5)
+	{
+		sortTableByLocation();
+	}
+	else if (value==6)
+	{
+		sortTableByRange();
+	}
+	else if (value==7)
+	{
+		sortTableByAvgSpeed();
+	}
+	else if (value==8)
+	{
+		sortTableByStatus();
+	}
+
+}
