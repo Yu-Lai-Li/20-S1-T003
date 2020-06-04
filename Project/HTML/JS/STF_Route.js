@@ -7,20 +7,6 @@ let map = new mapboxgl.Map({
         center: [145.135844,-37.911103],
         zoom: 11
 });
-if('geolocation' in navigator)
-{
-  navigator.geolocation.getCurrentPosition(currentLocationCallback);
-}
-else
-{
-  alert("Geolocation Is Not Available");
-}
-function currentLocationCallback(position)
-{
-  let lat = position.coords.latitude;
-  let lng = position.coords.longitude;
-  map.panTo([lng,lat]);
-}
 function displayInformation()
 {
   let divRef = document.getElementById("selectedFlightInformation")
@@ -45,8 +31,10 @@ function displayLocation()
   for(let i=0;i<airportsData.length;i++)
   if(airplaneData.location==airportsData[i].airportCode)
   {
+    map.panTo([airportsData[i].longitude,airportsData[i].latitude])
     origin.push(airportsData[i].longitude);
-     origin.push(airportsData[i].latitude);
+    origin.push(airportsData[i].latitude);
+
     let marker = new mapboxgl.Marker({ "color": "#FF0D00" });
     let popup = new mapboxgl.Popup({ offset: 20});
     marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
@@ -194,29 +182,42 @@ function calculateDistance(latitude1,longitude1,latitude2,longitude2)
 }
 function calculateTimeNeeded(distance)
 {
-  let time =distance/airplaneData.airplanes.avgSpeed
+  let airplaneData=getSelectedAirplaneLocalStorage();
+  let time =distance/airplaneData.avgSpeed
   return time
 }
+//Dispaly Time Needed and distance
 function displayDistanceAndTime()
 {
   let distances=[];
-  distance.push(origin);
-  console.log(distance);
+  distances.push(origin);
   let pathData=getRouteListDataLocalStorage();
   for(let i=0;i<pathData._routeList.length;i++)
   {
-      distance.push(pathData._routeList[i]._coordinates)
+      distances.push(pathData._routeList[i]._coordinates)
   }
-  for(let k=0;k<distance.length;k++)
+  for(let k=0;k<distances.length;k++)
   {
-    calculateDistance(distance[k]);
+    let distanceBetween=calculateDistance(distances[k][1],distances[k][0],distances[k+1][1],distances[k+1][0]);
+    let timeNeeded=calculateTimeNeeded(distanceBetween);
+    let totalDistance="";
+        totalDistance+=distanceBetween;
+      let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+      let popup = new mapboxgl.Popup({ offset: 40});
+      marker.setLngLat([distances[k+1][0],distances[k+1][1]]);
+      let text=`${distanceBetween.toFixed(2)} Km From Last Airport<br>`
+      text+=`Needs ${timeNeeded.toFixed(3)} hours`
+      popup.setHTML(text);
+      marker.setPopup(popup);
+
+      marker.addTo(map);
+      popup.addTo(map);
   }
 }
 //showPathway
 function showPath()
 {
-  displayDistanceAndTime()
-  console.log(origin);
+
   let pathData=getRouteListDataLocalStorage();
   let object = {
     type: "geojson",
@@ -244,6 +245,7 @@ function showPath()
     layout: { "line-join": "round", "line-cap": "round" },
     paint: { "line-color": "#888", "line-width": 6 }
   });
+    displayDistanceAndTime()
 }
 let backRef=document.getElementById("back")
 backRef.addEventListener("click",function(){window.location="Scheduling_The_Flight.html"})
