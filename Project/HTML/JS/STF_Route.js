@@ -33,34 +33,102 @@ function displayInformation()
     divRef.innerHTML=output;
 
 }
+//show information
 window.addEventListener("load",function(){displayInformation()})
-let airplaneData=getAirplanesDataLocalStorage();
+//show selectedAirplane
+let airplaneData=getSelectedAirplaneLocalStorage();
+let airportsData=getAirportsDataLocalStorage();
+let origin=[];
+window.addEventListener("load",function(){displayLocation()});
+function displayLocation()
+{
+  for(let i=0;i<airportsData.length;i++)
+  if(airplaneData.location==airportsData[i].airportCode)
+  {
+    origin.push(airportsData[i].longitude);
+     origin.push(airportsData[i].latitude);
+    let marker = new mapboxgl.Marker({ "color": "#FF0D00" });
+    let popup = new mapboxgl.Popup({ offset: 20});
+    marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
+    let text=`ID:${airplaneData.id}<br>`
+    text+=`Fly Range:${airplaneData.range}<br>`
+    text+=`AvgSpeed:${airplaneData.avgSpeed}<br>`
+    text+=`Type:${airplaneData.type}<br>`
+    text+=`Status:${airplaneData.status}<br>`
+    text+=`Airline:${airplaneData.airline}<br>`
+    popup.setHTML(text);
+    marker.setPopup(popup);
+
+    marker.addTo(map);
+    popup.addTo(map);
+  }
+}
+//Search for airports
+let countryRef=document.getElementById("country");
+let cityRef=document.getElementById("city");
+let currentMarkers=[];
+function positionCallback()
+{
+  let url ="https://eng1003.monash/api/v1/airports/";
+  let data =
+  {
+    u: "ylii0235",
+    key: DARKSKY_KEY,
+    country:countryRef.value,
+    city:cityRef.value,
+    callback: "search"
+  };
+  webServiceRequest(url,data);
+}
+function search(data)
+{
+  if (currentMarkers.length>0)
+  {
+    for (let i = 0; i < currentMarkers.length; i++)
+    {
+      currentMarkers[i].remove();
+    }
+  }
+  for(let i=0;i<data.length;i++)
+  {
+    let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+    let popup = new mapboxgl.Popup({ offset: 20});
+    marker.setLngLat([data[i].longitude,data[i].latitude]);
+    let text=`${data[i].airportCode}<br>`
+    text+=`Airport Name:${data[i].name}<br>`
+    text+=`City:${data[i].city}<br>`
+    text+=`Country:${data[i].country}<br>`
+    popup.setHTML(text);
+    marker.setPopup(popup);
+
+    marker.addTo(map);
+    popup.addTo(map);
+    currentMarkers.push(marker)
+  }
+}
 //Route
-class Route
+class Waypoint
 {
   constructor(airportN,code,lat,lng)
   {
     this._airportName=airportN;
     this._code=code;
-    this._latitude=lat;
-    this._longitude=lng;
+    this._coordinates=[lng,lat]
   }
     get airportName(){return this._airportName}
     get code(){return this._code}
-    get latitude(){return this._latitude}
-    get longitude(){return this._longitude}
+    get coordinates(){return this.coordinates}
 
-    set airportName(newName){ this._airportName}
-    set code(newCode){this._code}
-    set latitude(newLat){this._latitude}
-    set longitude(newLng){this._longitude}
 
+    set airportName(newName){ this._airportName=newName}
+    set code(newCode){this._code=newCode}
+    set coordinates(newCoordinate){this._coordinates=newCoordinate}
     fromData(data)
     {
       this._airportName=data._airportName;
       this._code=data._code;
-      this._latitude=data._latitude;
-      this._longitude=data._longitude;
+      this._coordinates=[data._coordinates[0],data._coordinates[1]];
+
     }
 }
 //RouteList
@@ -86,7 +154,8 @@ class RouteList
     }
   }
 }
-//
+//addWaypoints
+let routeList= new RouteList();
 map.on('click', function(e)
 {
   let airportsData=getAirportsDataLocalStorage();
@@ -95,7 +164,19 @@ map.on('click', function(e)
   {
     if(coordinates.lng.toFixed(1)==airportsData[i].longitude.toFixed(1) && coordinates.lat.toFixed(1)==airportsData[i].latitude.toFixed(1))
     {
+      let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+      let popup = new mapboxgl.Popup({ offset: 20});
+      marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
+      let text=`AirpoertName:${airportsData[i].name}<br>`
+      text+=`Airport Code:${airportsData[i].airportCode}<br>`
+      popup.setHTML(text);
+      marker.setPopup(popup);
 
+      marker.addTo(map);
+      popup.addTo(map);
+      let waypoints= new Waypoint(airportsData[i].name,airportsData[i].airportCode,airportsData[i].latitude,airportsData[i].longitude);
+      routeList.addRoute(waypoints);
+      updateRouteListLocalStorage(routeList);
     }
   }
 });
@@ -111,12 +192,17 @@ function calculateDistance(latitude1,longitude1,latitude2,longitude2)
 		 let distance =(R * c)/1000;
      return distance;
 }
-function calculateTimeNeeded(speed)
+function calculateTimeNeeded(distance)
 {
-  //distancs/speed
+  let time =distance/airplaneData.airplanes.avgSpeed
+  return time
 }
+
+//showPathway
 function showPath()
 {
+  console.log(origin);
+  let pathData=getRouteListDataLocalStorage();
   let object = {
     type: "geojson",
     data:
@@ -130,9 +216,10 @@ function showPath()
       }
     }
   };
-  for(let i = 0; i < locations.length; i++)
+  object.data.geometry.coordinates.push(origin);
+  for(let i = 0; i < pathData._routeList.length; i++)
   {
-    object.data.geometry.coordinates.push(locations[i].coordinates);
+    object.data.geometry.coordinates.push(pathData._routeList[i]._coordinates);
   }
 
   map.addLayer({
