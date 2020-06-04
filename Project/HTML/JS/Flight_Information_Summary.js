@@ -56,8 +56,8 @@ function distanceDisplay()
 }
 function displayAirplaneInfo()
 {
-  let registationRef=document.getElementById("registation")
-  registationRef.innerHTML=;
+  let registrationRef=document.getElementById("registration")
+  registrationRef.innerHTML=;
   let locationRef=document.getElementById("location")
   locationRef.innerHTML=;
   let rangeRef=document.getElementById("range")

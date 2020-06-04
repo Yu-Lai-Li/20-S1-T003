@@ -21,7 +21,20 @@ function currentLocationCallback(position)
   let lng = position.coords.longitude;
   map.panTo([lng,lat]);
 }
+function displayInformation()
+{
+  let divRef = document.getElementById("selectedFlightInformation")
+  let information=getSelectedAirplaneLocalStorage();
+  let time=getTime();
+  let date=getDate();
+  let output="";
+      output+=`For<br> ${information.registration}`;
+      output+="";
+      output+="";
+      output+="";
+    divRef.innerHTML=output;
 
+}
 function calculateDistance(latitude1,longitude1,latitude2,longitude2)
 {
 		 let R = 6371e3;
