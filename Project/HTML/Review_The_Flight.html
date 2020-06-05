@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <link rel="stylesheet" href="css/weather-icons.min.css">
+  <!--<link rel="stylesheet" href="css/weather-icons.min.css">-->
   <title>SkYsCheGulare</title>
 </head>
 <body>
@@ -59,13 +59,24 @@
           <i class="wi wi-night-sleet"></i>
         </div>
         <div>
-          <table id="flightInformation">
-            <!-- sample rows-->
-            <tr><th>Flight No.</th><th>Departing Airport</th><th>Depature<br>Date</th>
-              <th>Departure <br>Time</th><th>Arrival Airport </th><th>Arrival Date</th>
-              <th>Arrival Time</th><th>Distance</th>
-            </tr>
-          </table>
+          <div class="mdl-cell mdl-cell--6-col">
+            <table class="mdl-data-table mdl-js-data-table">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Flight no.</th>
+      <th>Airport departure</th>
+      <th>Departure date</th>
+      <th>Departure time</th>
+      <th>Airport arrival</th>
+      <th>Distance</th>
+    </tr>
+  </thead>
+  <tbody id="flightInfoOutput">
+  <!--output flight information-->
+  </tbody>
+</table>
+          </div>
+
           <!-- IDEA: Table -->
         </div>
         <div class="mdl-grid">
