@@ -17,6 +17,7 @@ const FINAL_DATE="datelist"
 const FINAL_AIRPLANE="airplanelist"
 const FINAL_AIRPORT="airportlist"
 const ORIGIN="origin"
+const DISTANCE_KEY="distance"
 //get origin2
 function updateOrigin(origin)
 {
@@ -169,7 +170,17 @@ function updateSelectedAirplaneLocalStorage(airportsData)
     console.log("localStorage is not supported by current browser.");
   }
 }
-
+function updateDistanceLocalStorage(distance)
+{
+  if (typeof(Storage) !== "undefined")
+  {
+    localStorage.setItem(`${DISTANCE_KEY}`,JSON.stringify(distance));
+  }
+  else
+  {
+    console.log("localStorage is not supported by current browser.");
+  }
+}
 //get infomation from localStorage
 function getFlightDataLocalStorage()
 {
@@ -209,6 +220,11 @@ function getTime()
 function getDate()
 {
   let data = JSON.parse(localStorage.getItem(`${DATE_KEY}`));
+  return data;
+}
+function getDistance()
+{
+  let data = JSON.parse(localStorage.getItem(`${DISTANCE_KEY}`));
   return data;
 }
 //checkIfDataExistsLocalStorage
