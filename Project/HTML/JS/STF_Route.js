@@ -37,7 +37,7 @@ function displayLocation()
     origin.push(airportsData[i].latitude);
     origin2.push(airportsData[i])
     updateOrigin(origin2);
-    
+
     let marker = new mapboxgl.Marker({ "color": "#FF0D00" });
     let popup = new mapboxgl.Popup({ offset: 20});
     marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
@@ -205,6 +205,7 @@ function displayDistanceAndTime()
     let timeNeeded=calculateTimeNeeded(distanceBetween);
     let totalDistance="";
         totalDistance+=distanceBetween;
+        updateDistanceLocalStorage(totalDistance);
       let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
       let popup = new mapboxgl.Popup({ offset: 40});
       marker.setLngLat([distances[k+1][0],distances[k+1][1]]);
@@ -247,7 +248,7 @@ function showPath()
     layout: { "line-join": "round", "line-cap": "round" },
     paint: { "line-color": "#888", "line-width": 6 }
   });
-    displayDistanceAndTime()
+
 }
 //clearPath
 function clearPath()
@@ -263,3 +264,4 @@ confirmRef.addEventListener("click",function()
 {
     window.location="Review_The_Flight.html";
 })
+confirmREf.addEventListener("click"displayDistanceAndTime);

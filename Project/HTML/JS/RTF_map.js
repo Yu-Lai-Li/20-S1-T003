@@ -152,11 +152,12 @@ let date=getDate();
 //display information in table
 let table=document.getElementById("flightInfoOutput");
 let output="<tr>";
-output+=`<td class="mdl-data-table__cell">${airplaneData.id}</td>`;
+output+=`<td class="mdl-data-table__cell">${getOrigin()[0].name}</td>`;
 output+=`<td class="mdl-data-table__cell">${points._routeList[0]._airportName}</td>`
 output+=`<td class="mdl-data-table__cell">${date}</td>`
 output+=`<td class="mdl-data-table__cell">${time}</td>`
 output+=`<td class="mdl-data-table__cell">${points._routeList[points._routeList.length-1]._airportName}</td>`
+output+=`<td class="mdl-data-table__cell">${getDistance()}</td>`
 //output+=`<td class="mdl-data-table__cell">${points._routeList[arrivalAirportIndex]._airportName}</td>`
 
 output+="</tr>";
