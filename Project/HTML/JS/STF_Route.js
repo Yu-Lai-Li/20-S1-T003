@@ -264,4 +264,4 @@ confirmRef.addEventListener("click",function()
 {
     window.location="Review_The_Flight.html";
 })
-confirmREf.addEventListener("click"displayDistanceAndTime);
+confirmRef.addEventListener("click",displayDistanceAndTime);

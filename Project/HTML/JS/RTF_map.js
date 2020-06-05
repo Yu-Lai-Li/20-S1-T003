@@ -73,9 +73,35 @@ function showThePath()
 }
 map.on("load",showThePath);
 //display markers
-  let points=getWaypointsListDataLocalStorage()
+  let points=getWaypointsListDataLocalStorage();
+  let originSelected=getOrigin();
+
+
+  let origin2=[];
+  function displayLocation()
+  {
+    for(let i=0;i<airportsData.length;i++)
+    if(airplaneData.location==airportsData[i].airportCode)
+    {
+      map.panTo([airportsData[i].longitude,airportsData[i].latitude])
+      origin2.push(airportsData[i])
+      updateOrigin(origin2);
+
+      let marker = new mapboxgl.Marker({ "color": "#FF0D00" });
+      let popup = new mapboxgl.Popup({ offset: 20});
+      marker.setLngLat(origin);
+      let text=`${getOrigin()[0].airportCode}<br>`
+      text+=`Airport Name:${getOrigin()[0].name}<br>`
+      popup.setHTML(text);
+      marker.setPopup(popup);
+      marker.addTo(map);
+      popup.addTo(map);
+    }
+  }
+  map.on('load',displayLocation);
 function displayMarker()
 {
+
   for (let i=0;i<points._routeList.length;i++)
   {
     let location=points._routeList[i]
@@ -152,20 +178,11 @@ let date=getDate();
 //display information in table
 let table=document.getElementById("flightInfoOutput");
 let output="<tr>";
+output+=`<td class="mdl-data-table__cell">${airplaneData.id}</td>`;
 output+=`<td class="mdl-data-table__cell">${getOrigin()[0].name}</td>`;
-output+=`<td class="mdl-data-table__cell">${points._routeList[0]._airportName}</td>`
 output+=`<td class="mdl-data-table__cell">${date}</td>`
 output+=`<td class="mdl-data-table__cell">${time}</td>`
 output+=`<td class="mdl-data-table__cell">${points._routeList[points._routeList.length-1]._airportName}</td>`
 output+=`<td class="mdl-data-table__cell">${getDistance()}</td>`
-//output+=`<td class="mdl-data-table__cell">${points._routeList[arrivalAirportIndex]._airportName}</td>`
-
 output+="</tr>";
 table.innerHTML=output;
-/*
-<tr>
-  <td class="mdl-data-table__cell--non-numeric">Don Aubrey</td>
-  <td>25</td>
-  <td>49021</td>
-</tr>
-                  */
