@@ -7,23 +7,6 @@ let map = new mapboxgl.Map({
         center: [145.135844,-37.911103],
         zoom: 11
 });
-const ORIGIN="origin"
-function updateOrigin(origin)
-{
-  if (typeof(Storage) !== "undefined")
-  {
-    localStorage.setItem(`${ORIGIN}`,JSON.stringify(origin));
-  }
-  else
-  {
-    console.log("localStorage is not supported by current browser.");
-  }
-}
-function getOrigin()
-{
-  let data = JSON.parse(localStorage.getItem(`${ORIGIN}`));
-  return data;
-}
 function displayInformation()
 {
   let divRef = document.getElementById("selectedFlightInformation")
