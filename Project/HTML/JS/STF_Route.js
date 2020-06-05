@@ -37,7 +37,7 @@ function displayLocation()
     origin.push(airportsData[i].latitude);
     origin2.push(airportsData[i])
     updateOrigin(origin2);
-    
+
     let marker = new mapboxgl.Marker({ "color": "#FF0D00" });
     let popup = new mapboxgl.Popup({ offset: 20});
     marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
@@ -190,6 +190,7 @@ function calculateTimeNeeded(distance)
   return time
 }
 //Dispaly Time Needed and distance
+let currentMarkers2=[];
 function displayDistanceAndTime()
 {
   let distances=[];
@@ -215,6 +216,7 @@ function displayDistanceAndTime()
 
       marker.addTo(map);
       popup.addTo(map);
+      currentMarkers2.push(marker);
   }
 }
 //showPathway
@@ -252,6 +254,14 @@ function showPath()
 //clearPath
 function clearPath()
 {
+  if (currentMarkers2.length>0)
+  {
+    for (let i = 0; i < currentMarkers2.length; i++)
+    {
+      currentMarkers2[i].remove();
+    }
+  }
+  console.log(currentMarkers);
   map.removeLayer("routes");
   map.removeSource("routes");
 }
