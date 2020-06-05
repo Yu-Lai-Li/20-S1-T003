@@ -206,4 +206,4 @@ function checkIfDataExistsLocalStorage()
 }
 
 let reviewRef = document.getElementById("viewFilghtInformation")
-reviewRef.addEventListener("click",function(){window.location="Homepage.html"})
+//reviewRef.addEventListener("click",function(){window.location="Homepage.html"})

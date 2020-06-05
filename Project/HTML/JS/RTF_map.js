@@ -71,6 +71,29 @@ function showThePath()
     paint: { "line-color": "#888", "line-width": 6 }
   });
 }
+map.on("load",showThePath);
+//display markers
+  let points=getWaypointsListDataLocalStorage()
+function displayMarker()
+{
+  for (let i=0;i<points._routeList.length;i++)
+  {
+    let location=points._routeList[i]
+    let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
+    let popup = new mapboxgl.Popup({ offset: 20});
+    marker.setLngLat(location._coordinates);
+    let text=`${location._code}<br>`
+    text+=`Airport Name:${location._airportName}<br>`
+    popup.setHTML(text);
+    marker.setPopup(popup);
+
+    marker.addTo(map);
+    popup.addTo(map);
+  }
+
+}
+
+map.on("load",displayMarker);
 //update final time
 class TimeList
 {
@@ -84,15 +107,22 @@ class TimeList
   {
     this._timeList.push(time)
   }
-  formData()
-  {
+  //  Display feature function apply to all
+  displayItem() {
+    //retrieve Information
+    let displayItem =
+    sessionStorage.getItem("gfg");
+    //display item
+    document.getElementById(
+      "coloumn_on_table").innerHTML = displayItem
+    }
 
   }
-}
+
 let timeList=new TimeList;
+let time =getTime();
 function timeLists()
 {
-  let time =getTime();
   timeList.addTime(time);
   updateTimeList(timeList);
 }
@@ -102,7 +132,6 @@ function timeLists()
 //update Route
 //
 window.addEventListener("load",function(){findOrigin()})
-window.addEventListener("load",function(){showThePath()})
 let backRef=document.getElementById("back")
 backRef.addEventListener("click",function(){window.location="STF_Route.html"})
 let confirmRef=document.getElementById("confirm")
@@ -114,3 +143,28 @@ confirmRef.addEventListener("click",function()
     window.location="Flight_Has_Been_Booked.html";
   }
 })
+
+//retireve date data
+let date=getDate();
+//retrieve last index of waypoints data = arrival airport
+
+
+//display information in table
+let table=document.getElementById("flightInfoOutput");
+let output="<tr>";
+output+=`<td class="mdl-data-table__cell">${airplaneData.id}</td>`;
+output+=`<td class="mdl-data-table__cell">${points._routeList[0]._airportName}</td>`
+output+=`<td class="mdl-data-table__cell">${date}</td>`
+output+=`<td class="mdl-data-table__cell">${time}</td>`
+output+=`<td class="mdl-data-table__cell">${points._routeList[points._routeList.length-1]._airportName}</td>`
+//output+=`<td class="mdl-data-table__cell">${points._routeList[arrivalAirportIndex]._airportName}</td>`
+
+output+="</tr>";
+table.innerHTML=output;
+/*
+<tr>
+  <td class="mdl-data-table__cell--non-numeric">Don Aubrey</td>
+  <td>25</td>
+  <td>49021</td>
+</tr>
+                  */
