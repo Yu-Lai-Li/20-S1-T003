@@ -37,6 +37,7 @@ function displayLocation()
     origin.push(airportsData[i].latitude);
     origin2.push(airportsData[i])
     updateOrigin(origin2);
+    
     let marker = new mapboxgl.Marker({ "color": "#FF0D00" });
     let popup = new mapboxgl.Popup({ offset: 20});
     marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);

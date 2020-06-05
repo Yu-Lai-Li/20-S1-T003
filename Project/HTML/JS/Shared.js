@@ -16,6 +16,25 @@ const FINAL_TIME="timelist"
 const FINAL_DATE="datelist"
 const FINAL_AIRPLANE="airplanelist"
 const FINAL_AIRPORT="airportlist"
+const ORIGIN="origin"
+//get origin2
+function updateOrigin(origin)
+{
+  if (typeof(Storage) !== "undefined")
+  {
+    localStorage.setItem(`${ORIGIN}`,JSON.stringify(origin));
+  }
+  else
+  {
+    console.log("localStorage is not supported by current browser.");
+  }
+}
+function getOrigin()
+{
+  let data = JSON.parse(localStorage.getItem(`${ORIGIN}`));
+  return data;
+}
+
 // webServiceRequest
 function webServiceRequest(url,data)
 {
