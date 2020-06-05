@@ -113,6 +113,7 @@ map.on('click', function(e)
           currentMarkers[i].remove();
         }
       }
+
       //add marker for selected airport
       let marker = new mapboxgl.Marker({ "color": "#FF8C00" });
       let popup = new mapboxgl.Popup({ offset: 20});

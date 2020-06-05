@@ -150,6 +150,7 @@ function updateSelectedAirplaneLocalStorage(airportsData)
     console.log("localStorage is not supported by current browser.");
   }
 }
+
 //get infomation from localStorage
 function getFlightDataLocalStorage()
 {

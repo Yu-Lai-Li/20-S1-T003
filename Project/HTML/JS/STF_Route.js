@@ -7,6 +7,23 @@ let map = new mapboxgl.Map({
         center: [145.135844,-37.911103],
         zoom: 11
 });
+const ORIGIN="origin"
+function updateOrigin(origin)
+{
+  if (typeof(Storage) !== "undefined")
+  {
+    localStorage.setItem(`${ORIGIN}`,JSON.stringify(origin));
+  }
+  else
+  {
+    console.log("localStorage is not supported by current browser.");
+  }
+}
+function getOrigin()
+{
+  let data = JSON.parse(localStorage.getItem(`${ORIGIN}`));
+  return data;
+}
 function displayInformation()
 {
   let divRef = document.getElementById("selectedFlightInformation")
@@ -25,6 +42,7 @@ window.addEventListener("load",function(){displayInformation()})
 let airplaneData=getSelectedAirplaneLocalStorage();
 let airportsData=getAirportsDataLocalStorage();
 let origin=[];
+let origin2=[];
 window.addEventListener("load",function(){displayLocation()});
 function displayLocation()
 {
@@ -34,7 +52,8 @@ function displayLocation()
     map.panTo([airportsData[i].longitude,airportsData[i].latitude])
     origin.push(airportsData[i].longitude);
     origin.push(airportsData[i].latitude);
-
+    origin2.push(airportsData[i])
+    updateOrigin(origin2);
     let marker = new mapboxgl.Marker({ "color": "#FF0D00" });
     let popup = new mapboxgl.Popup({ offset: 20});
     marker.setLngLat([airportsData[i].longitude,airportsData[i].latitude]);
