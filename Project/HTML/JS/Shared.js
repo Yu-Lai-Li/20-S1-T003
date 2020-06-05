@@ -1,15 +1,21 @@
 const FLIGHT_INDEX_KEY = "flightIndex";
 const FLIGHT_DATA_KEY = "flightData";
 const ROUTE_INDEX_KEY = "routeIndex";
-const ROUTE_DATA_KEY = "routeData";
+const ROUTE_DATA_KEY = "routeListData";
+const WAYPOINTS_DATA_KEY = "WaypointsData";
 const AIRPORT_INDEX_KEY = "airportsIndex";
 const AIRPORT_DATA_KEY = "airportsData";
 const AIRPLANES_INDEX_KEY = "airplanesIndex";
 const AIRPLANES_DATA_KEY= "airplanesdata";
+const FINAL_AIRPLANES_DATA_KEY= "airplanesdata2";
 const SELECTED_AIRPORT_DATA_KEY= "selectedAirportData";
 const SELECTED_AIRPLANE_DATA_KEY= "selectedAirplane";
 const TIME_KEY="time"
 const DATE_KEY="date"
+const FINAL_TIME="timelist"
+const FINAL_DATE="datelist"
+const FINAL_AIRPLANE="airplanelist"
+const FINAL_AIRPORT="airportlist"
 // webServiceRequest
 function webServiceRequest(url,data)
 {
@@ -43,6 +49,17 @@ function updateTime(time)
   if (typeof(Storage) !== "undefined")
   {
     localStorage.setItem(`${TIME_KEY}`,JSON.stringify(time));
+  }
+  else
+  {
+    console.log("localStorage is not supported by current browser.");
+  }
+}
+function updateTimeList(time)
+{
+  if (typeof(Storage) !== "undefined")
+  {
+    localStorage.setItem(`${FINAL_TIME}`,JSON.stringify(time));
   }
   else
   {
@@ -98,11 +115,11 @@ function updateFlightLocalStorage(flightData)
   }
 }
 //update Route
-function updateRouteListLocalStorage(routeListData)
+function updateWaypointsListLocalStorage(routeListData)
 {
   if (typeof(Storage) !== "undefined")
   {
-    localStorage.setItem(`${ROUTE_DATA_KEY}`,JSON.stringify(routeListData));
+    localStorage.setItem(`${WAYPOINTS_DATA_KEY}`,JSON.stringify(routeListData));
   }
   else
   {
@@ -139,9 +156,9 @@ function getFlightDataLocalStorage()
   let data = JSON.parse(localStorage.getItem(`${FLIGHT_DATA_KEY}`));
   return data;
 }
-function getRouteListDataLocalStorage()
+function getWaypointsListDataLocalStorage()
 {
-  let data = JSON.parse(localStorage.getItem(`${ROUTE_DATA_KEY}`));
+  let data = JSON.parse(localStorage.getItem(`${WAYPOINTS_DATA_KEY}`));
   return data;
 }
 function getAirportsDataLocalStorage()

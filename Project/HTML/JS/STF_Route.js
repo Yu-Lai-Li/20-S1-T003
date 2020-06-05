@@ -120,7 +120,7 @@ class Waypoint
     }
 }
 //RouteList
-class RouteList
+class Waypoints
 {
   constructor()
   {
@@ -143,7 +143,7 @@ class RouteList
   }
 }
 //addWaypoints
-let routeList= new RouteList();
+let waypointsList= new Waypoints();
 map.on('click', function(e)
 {
   let airportsData=getAirportsDataLocalStorage();
@@ -163,8 +163,8 @@ map.on('click', function(e)
       marker.addTo(map);
       popup.addTo(map);
       let waypoints= new Waypoint(airportsData[i].name,airportsData[i].airportCode,airportsData[i].latitude,airportsData[i].longitude);
-      routeList.addRoute(waypoints);
-      updateRouteListLocalStorage(routeList);
+      waypointsList.addRoute(waypoints);
+      updateWaypointsListLocalStorage(waypointsList);
     }
   }
 });
@@ -191,7 +191,7 @@ function displayDistanceAndTime()
 {
   let distances=[];
   distances.push(origin);
-  let pathData=getRouteListDataLocalStorage();
+  let pathData=getWaypointsListDataLocalStorage();
   for(let i=0;i<pathData._routeList.length;i++)
   {
       distances.push(pathData._routeList[i]._coordinates)
@@ -218,7 +218,7 @@ function displayDistanceAndTime()
 function showPath()
 {
 
-  let pathData=getRouteListDataLocalStorage();
+  let pathData=getWaypointsListDataLocalStorage();
   let object = {
     type: "geojson",
     data:
@@ -237,7 +237,6 @@ function showPath()
   {
     object.data.geometry.coordinates.push(pathData._routeList[i]._coordinates);
   }
-
   map.addLayer({
     id: "routes",
     type: "line",

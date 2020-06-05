@@ -24,17 +24,85 @@ function positionCallback(position)
 
 function weatherCallback(weather)
 {
-  console.log(weather.currently.icon)
+}
+//show the path on the map
+let airplaneData=getSelectedAirplaneLocalStorage();
+let airportsData=getAirportsDataLocalStorage();
+let origin=[];
+function findOrigin()
+{
+  for(let i=0;i<airportsData.length;i++)
+  {
+    if(airplaneData.location==airportsData[i].airportCode)
+    {
+      map.panTo([airportsData[i].longitude,airportsData[i].latitude])
+      origin.push(airportsData[i].longitude);
+      origin.push(airportsData[i].latitude);
+    }
+  }
+}
+function showThePath()
+{
+  let pathData=getWaypointsListDataLocalStorage();
+  let object = {
+    type: "geojson",
+    data:
+    {
+      type: "Feature",
+      properties: {},
+      geometry:
+      {
+        type: "LineString",
+        coordinates: []
+      }
+    }
+  };
+  object.data.geometry.coordinates.push(origin);
+  for(let i = 0; i < pathData._routeList.length; i++)
+  {
+    object.data.geometry.coordinates.push(pathData._routeList[i]._coordinates);
+  }
+
+  map.addLayer({
+    id: "routes",
+    type: "line",
+    source: object,
+    layout: { "line-join": "round", "line-cap": "round" },
+    paint: { "line-color": "#888", "line-width": 6 }
+  });
 }
 //update final time
+class TimeList
+{
+  constructor()
+  {
+    this._timeList=[];
+  }
+  get timeList(){return this._timeList}
+
+  addTime(time)
+  {
+    this._timeList.push(time)
+  }
+  formData()
+  {
+
+  }
+}
+let timeList=new TimeList;
+function timeLists()
+{
+  let time =getTime();
+  timeList.addTime(time);
+  updateTimeList(timeList);
+}
 //update fianl data
-//update final airplane
 //update final airportss
 //update aiprlane list
 //update Route
-//navigation to next page
-//windowEVENT
 //
+window.addEventListener("load",function(){findOrigin()})
+window.addEventListener("load",function(){showThePath()})
 let backRef=document.getElementById("back")
 backRef.addEventListener("click",function(){window.location="STF_Route.html"})
 let confirmRef=document.getElementById("confirm")
@@ -42,6 +110,7 @@ confirmRef.addEventListener("click",function()
 {
   confirm("Are Sure Make This Route?")
   {
+    timeLists();
     window.location="Flight_Has_Been_Booked.html";
   }
 })
