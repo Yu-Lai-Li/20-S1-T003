@@ -89,13 +89,14 @@ function airplaneCallback()
   webServiceRequest(url,data);
 }
 //locate Airplanes and chosed aiprport
-let airplaneData=getAirplanesDataLocalStorage();
+
 let airplaneInAirportTep=[];
 let airplaneInAirport=[];
 let coordinatesOfSelectedAirport=[];
 map.on('click', function(e)
 {
   let airplaneInAirportTep=[];
+  let airplaneData=getAirplanesDataLocalStorage();
   let airportsData=getAirportsDataLocalStorage();
   let coordinates=e.lngLat
   for (let i=0;i<airportsData.length;i++)
