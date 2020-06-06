@@ -248,6 +248,8 @@ let confirmRef=document.getElementById("confirm")
 confirmRef.addEventListener("click",function(){confirm()})
 function confirm()
 {
+  time();
+  date();
   let optionRef=document.getElementsByName("options")
   if(optionRef.length!=0)
   {
