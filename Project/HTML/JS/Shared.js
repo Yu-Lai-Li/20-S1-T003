@@ -21,17 +21,38 @@ const DISTANCE_KEY="distance"
 
 class Route
 {
-  constructor(time)
+  constructor(time,date,origin,waypoints,airplane)
   {
-    this._time=time
+    this._time=time;
+    this._date=date;
+    this._origin=origin;
+    this._waypoints=waypoints;
+    this._airplane=airplane;
   }
-  getTime()
+
+  getTime(){return this._time;}
+  getDate(){return this._date;}
+  getOrigin(){return this._date;}
+  getWaypoints(){return this._date;}
+  getAirplane(){return this._airplane;}
+
+  setTime(newTime){this._time=newTime;}
+  setDate(newDate){this._date=newDate;}
+  setOrigin(newOrigin){this._origin=newOrigin;}
+  setWaypoints(newWaypoints){this._waypoints=newWaypoints;}
+  setAirplane(newAirplane){this._airplane=newAirplane;}
+
+  fromData(data)
   {
-    return this._time;
+    this._time=data._time;
+    this._date=data._date;
+    this._origin=data._origin;
+    this._waypoints=data._waypoints;
+    this._airplane=data._airplane;
+
   }
-  setTime(newTime)
-  {this._time=newTime;}
-}
+  }
+
 class RouteList
 {
   constructor()
@@ -39,15 +60,27 @@ class RouteList
     this._routeList=[];
   }
   getRouteList(){return this._routeList;}
-addRoute(time)
+
+addRoute(time,date,origin,waypoints,airplane)
 {
-  let route= new Route(time);
+  let route= new Route(time,date,origin,waypoints,airplane);
   this._routeList.push(route);
+}
+
+fromData(data)
+{
+  let dataArray=data._routeList;
+  this._routeList=[];
+  for (let i=0; i<dataArray.length;i++)
+  {
+    let route= new Route();
+    route.fromData(dataArray[i]);
+    this._routeList.push(route);
+  }
 }
 }
 
 let routeList=new RouteList;
-updateRouteList(routeList);
 function updateRouteList(routeList)
 {
   if (typeof(Storage) !== "undefined")
@@ -275,11 +308,13 @@ function getDistance()
 //checkIfDataExistsLocalStorage
 function checkIfDataExistsLocalStorage()
 {
-  let data =localStorage.getItem(`${ROUTE_DATA_KEY}`);
-  if ( data !== "undefined" && data !==null && data !=="")
-  {
-    let routeData=getRouteList();
-    routeList.addRoute(routeData);
+  let data =getRouteList();
+  if(data)
+  if (data !== "undefined" && data !==null && data !=="")
+  {if( data._routeList.length>0)
+    {
+      routeList.fromData(data);
+    }
   }
   else
   {

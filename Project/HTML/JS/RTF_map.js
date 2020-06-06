@@ -173,9 +173,14 @@ confirmRef.addEventListener("click",function()
 
 //retireve date data
 let date=getDate();
+//let time=getTime(); has already been delacalred reorganise
+let originData=getOrigin();
+let waypoints=getWaypointsListDataLocalStorage();
+let airplane=getSelectedAirplaneLocalStorage();
 //retrieve last index of waypoints data = arrival airport
-routeList.addRoute(time);
+routeList.addRoute(time,date,originData,waypoints,airplane);
 updateRouteList(routeList);
+
 //display information in table
 let table=document.getElementById("flightInfoOutput");
 let output="<tr>";
