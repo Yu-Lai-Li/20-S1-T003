@@ -18,6 +18,47 @@ const FINAL_AIRPLANE="airplanelist"
 const FINAL_AIRPORT="airportlist"
 const ORIGIN="origin"
 const DISTANCE_KEY="distance"
+
+class Route
+{
+  constructor(time)
+  {
+    this._time=time
+  }
+  getTime()
+  {
+    return this._time;
+  }
+  setTime(newTime)
+  {this._time=newTime;}
+}
+class RouteList
+{
+  constructor()
+  {
+    this._routeList=[];
+  }
+  getRouteList(){return this._routeList;}
+addRoute(time)
+{
+  let route= new Route(time);
+  this._routeList.push(route);
+}
+}
+
+let routeList=new RouteList;
+updateRouteList(routeList);
+function updateRouteList(routeList)
+{
+  if (typeof(Storage) !== "undefined")
+  {
+    localStorage.setItem(`${ROUTE_DATA_KEY}`,JSON.stringify(routeList));
+  }
+  else
+  {
+    console.log("localStorage is not supported by current browser.");
+  }
+}
 //get origin2
 function updateOrigin(origin)
 {
@@ -35,7 +76,11 @@ function getOrigin()
   let data = JSON.parse(localStorage.getItem(`${ORIGIN}`));
   return data;
 }
-
+function getRouteList()
+{
+  let data = JSON.parse(localStorage.getItem(`${ROUTE_DATA_KEY}`));
+  return data;
+}
 // webServiceRequest
 function webServiceRequest(url,data)
 {
@@ -230,10 +275,11 @@ function getDistance()
 //checkIfDataExistsLocalStorage
 function checkIfDataExistsLocalStorage()
 {
-  let data =localStorage.getItem(`${LOCKER_DATA_KEY}`);
+  let data =localStorage.getItem(`${ROUTE_DATA_KEY}`);
   if ( data !== "undefined" && data !==null && data !=="")
   {
-    return true;
+    let routeData=getRouteList();
+    routeList.addRoute(routeData);
   }
   else
   {
@@ -243,3 +289,4 @@ function checkIfDataExistsLocalStorage()
 
 let reviewRef = document.getElementById("viewFilghtInformation")
 //reviewRef.addEventListener("click",function(){window.location="Homepage.html"})
+window.onload=checkIfDataExistsLocalStorage();

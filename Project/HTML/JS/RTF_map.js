@@ -147,6 +147,7 @@ class TimeList
 
 let timeList=new TimeList;
 let time =getTime();
+
 function timeLists()
 {
   timeList.addTime(time);
@@ -157,7 +158,7 @@ function timeLists()
 //update aiprlane list
 //update Route
 //
-window.addEventListener("load",function(){findOrigin()})
+window.addEventListener("load",findOrigin())
 let backRef=document.getElementById("back")
 backRef.addEventListener("click",function(){window.location="STF_Route.html"})
 let confirmRef=document.getElementById("confirm")
@@ -173,8 +174,8 @@ confirmRef.addEventListener("click",function()
 //retireve date data
 let date=getDate();
 //retrieve last index of waypoints data = arrival airport
-
-
+routeList.addRoute(time);
+updateRouteList(routeList);
 //display information in table
 let table=document.getElementById("flightInfoOutput");
 let output="<tr>";
